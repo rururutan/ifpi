@@ -133,7 +133,7 @@ int _export PASCAL
 ** ----- 画像ファイルに関する情報を得る ----------------------------------
 */
 int _export PASCAL
- GetPictureInfo(LPSTR buf, long len, unsigned int flag, PictureInfo *lpInfo)
+ GetPictureInfo(LPSTR buf, LONG_PTR len, unsigned int flag, PictureInfo *lpInfo)
 {
 	SPI_FILE f;
 	int err;
@@ -153,8 +153,8 @@ int _export PASCAL
 ** ----- 画像を展開する --------------------------------------------------
 */
 int _export PASCAL
- GetPicture(LPSTR buf, long len, unsigned int flag, HANDLE *pHBInfo,
-            HANDLE *pHBm, FARPROC lpProgCallback, long lData)
+ GetPicture(LPSTR buf, LONG_PTR len, unsigned int flag, HANDLE *pHBInfo,
+            HANDLE *pHBm, FARPROC lpProgCallback, LONG_PTR lData)
 {
 	SPI_FILE f;
 	int err;
@@ -178,8 +178,8 @@ int _export PASCAL
 ** ----- プレビュー・カタログ表示用画像縮小展開ルーティン ----------------
 */
 int _export PASCAL
- GetPreview(LPSTR buf, long len, unsigned int flag, HANDLE *pHBInfo,
-            HANDLE *pHBm, FARPROC lpProgCallback, long lData)
+ GetPreview(LPSTR buf, LONG_PTR len, unsigned int flag, HANDLE *pHBInfo,
+            HANDLE *pHBm, FARPROC lpProgCallback, LONG_PTR lData)
 {
 #ifdef SPI_IMPLEMENT_GETPREVIEW
 	SPI_FILE f;

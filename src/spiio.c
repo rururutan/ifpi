@@ -42,7 +42,7 @@
 /*
 **		入力ストリームのオープン
 */
-int SpiOpen(SPI_FILE *fp, LPSTR buf, long len, unsigned int flag)
+int SpiOpen(SPI_FILE *fp, LPSTR buf, LONG_PTR len, unsigned int flag)
 {
 	HANDLE hFile;
 	LPBYTE pBuff;

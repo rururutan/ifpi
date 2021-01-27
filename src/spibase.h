@@ -118,15 +118,18 @@ typedef struct PictureInfo {
 	WORD   x_density;			/* 画素の水平方向密度 */
 	WORD   y_density;			/* 画素の垂直方向密度 */
 	short  colorDepth;			/* 画素当たりのbit数 */
+#ifdef _WIN64
+	char   dummy[2];			/* アラインメント */
+#endif
 	HLOCAL hInfo;				/* 画像内のテキスト情報 */
 } PictureInfo;
 #pragma pack()
 
 	/* コールバック関数(typedef) */
 #ifdef __GNUC__
-typedef int CALLBACK (*SPIPROC) (int, int, long);
+typedef int CALLBACK (*SPIPROC) (int, int, LONG_PTR);
 #else
-typedef int (CALLBACK *SPIPROC) (int, int, long);
+typedef int (CALLBACK *SPIPROC) (int, int, LONG_PTR);
 #endif
 
 	/* グローバル変数 */
@@ -148,11 +151,11 @@ int _export PASCAL ConfigurationDlg(HWND, int);
 #endif
 int _export PASCAL GetPluginInfo(int, LPSTR, int);
 int _export PASCAL IsSupported(LPSTR, DWORD);
-int _export PASCAL GetPictureInfo(LPSTR, long, unsigned int, PictureInfo *);
-int _export PASCAL GetPicture(LPSTR, long, unsigned int, HANDLE *, HANDLE *,
-                              FARPROC, long);
-int _export PASCAL GetPreview(LPSTR, long, unsigned int, HANDLE *, HANDLE *,
-                              FARPROC, long);
+int _export PASCAL GetPictureInfo(LPSTR, LONG_PTR, unsigned int, PictureInfo *);
+int _export PASCAL GetPicture(LPSTR, LONG_PTR, unsigned int, HANDLE *, HANDLE *,
+                              FARPROC, LONG_PTR);
+int _export PASCAL GetPreview(LPSTR, LONG_PTR, unsigned int, HANDLE *, HANDLE *,
+                              FARPROC, LONG_PTR);
 
 
 /* -----------------------------------------------------------------------
@@ -194,18 +197,18 @@ typedef struct {
 	UINT   flags;				/* ストリーム状態フラグ */
 	HANDLE fhandle;				/* ファイル入力のファイルハンドル */
 	LPSTR  fname;				/* ファイル入力の入力ファイル名 */
-	LONG   foffset;				/* ファイル入力の読み込み開始オフセット */
+	LONG_PTR   foffset;			/* ファイル入力の読み込み開始オフセット */
 #ifdef SPI_SUPPORT_BUFFERING
 	LONG   ffilptr;				/* ファイル入力のファイルポインタ */
 #endif
 	LPBYTE mbuffer;				/* メモリ入力のバッファ */
 	LPBYTE mptr;				/* メモリ入力のポインタ */
-	LONG   mcount;				/* メモリ入力の残りバイト数 */
-	LONG   msize;				/* メモリ入力のデータサイズ */
+	LONG_PTR   mcount;			/* メモリ入力の残りバイト数 */
+	LONG_PTR   msize;			/* メモリ入力のデータサイズ */
 } SPI_FILE;
 
 	/* プロトタイプ宣言 */
-int SpiOpen(SPI_FILE *, LPSTR, long, unsigned int);
+int SpiOpen(SPI_FILE *, LPSTR, LONG_PTR, unsigned int);
 void SpiClose(SPI_FILE *);
 #ifdef SPI_SUPPORT_BUFFERING
 void SpiFillBuf(SPI_FILE *);
@@ -285,9 +288,9 @@ void ExecAboutDialog(HWND);
 int IsSupportedFormat(LPBYTE, DWORD, LPSTR);
 int GetImageInfo(SPI_FILE *, PictureInfo *);
 #ifdef SPI_IMPLEMENT_GETPREVIEW
-int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, long, BOOL);
+int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, LONG_PTR, BOOL);
 #else
-int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, long);
+int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, LONG_PTR);
 #endif
 
 

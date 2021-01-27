@@ -28,7 +28,7 @@ const LPCSTR PluginInfo[] = {	/* プラグイン情報 */
 	/* プロトタイプ宣言 */
 int IsSupportedFormat(LPBYTE, DWORD, LPSTR);
 int GetImageInfo(SPI_FILE *, PictureInfo *);
-int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, long);
+int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, LONG_PTR);
 static void pi_read_init_io(pi_structp, SPI_FILE *);
 static pi_size_t pi_read_filbuf_spi(pi_structp);
 
@@ -84,7 +84,7 @@ error:
 **		.pi ファイルの画像を展開する
 */
 int GetImage(SPI_FILE *fp, HANDLE *pHBInfo, HANDLE *pHBImg,
-             SPIPROC lpProgCallback, long lData)
+             SPIPROC lpProgCallback, LONG_PTR lData)
 {
 	enum { NCALL = 64 };	/* コールバック関数を呼ぶ回数 */
 	pi_struct pi;
