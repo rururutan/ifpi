@@ -111,13 +111,13 @@ int _export PASCAL
 ** ----- 展開可能な(対応している)ファイル形式か調べる --------------------
 */
 int _export PASCAL
- IsSupported(LPSTR filename, DWORD dw)
+ IsSupported(LPSTR filename, void* dw)
 {
 	BYTE buf[2048];
 	LPBYTE pbuf;
 	DWORD rbytes;
 
-	if (dw & 0xFFFF0000) {
+	if ((DWORD_PTR)dw & ~(DWORD_PTR)0xffff) {
 		rbytes = 2048;
 		pbuf = (LPBYTE)dw;
 	} else {

@@ -150,7 +150,7 @@ BOOL WINAPI DllMain(HINSTANCE, DWORD, LPVOID);
 int _export PASCAL ConfigurationDlg(HWND, int);
 #endif
 int _export PASCAL GetPluginInfo(int, LPSTR, int);
-int _export PASCAL IsSupported(LPSTR, DWORD);
+int _export PASCAL IsSupported(LPSTR, void*);
 int _export PASCAL GetPictureInfo(LPSTR, LONG_PTR, unsigned int, PictureInfo *);
 int _export PASCAL GetPicture(LPSTR, LONG_PTR, unsigned int, HANDLE *, HANDLE *,
                               FARPROC, LONG_PTR);
