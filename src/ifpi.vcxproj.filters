@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{f003e57f-31d6-43b3-a17d-bad0484fe497}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{8f511422-1205-40d6-a4c2-74a57fe08436}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="spientry.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ifpi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spialloc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spiio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="piread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ifpi.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="spibase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pilib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="ifpi.def">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
