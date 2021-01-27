@@ -1,0 +1,55 @@
+#-----------------------------------------
+#  PI to DIB filter for Susie32
+#  makefile for Borland C++ Compiler 5.5
+#-----------------------------------------
+
+	# Borland C++ の include ディレクトリ
+INCPATH	= c:\bcc\include
+	# Borland C++ の lib ディレクトリ
+LIBPATH	= c:\bcc\lib
+
+CC	= bcc32
+LD	= ilink32
+RC	= brcc32
+CFLAGS	= -WD -q -d -O2 -OS -Oi -Oc -w-8084 -w-8066 -DSPI_IMPLEMENT_DLLMAIN
+LDFLAGS	= -Tpd -aa -q -b:0x10400000 -c -Gn -Gz -m
+RFLAGS	= -i$(INCPATH)
+
+OBJS	= spientry.obj ifpi.obj spialloc.obj spiio.obj piread.obj
+APIOBJS	= memcpy.obj memmove.obj memset.obj
+LIBS	= import32.lib
+RES	= ifpi.res
+TARGET	= ifpi.spi
+
+
+$(TARGET) : $(OBJS) $(APIOBJS) $(RES)
+	$(LD) $(LDFLAGS) $(OBJS) $(APIOBJS),$@,,$(LIBS),,$(RES)
+
+$(APIOBJS) :
+	tlib /e $(LIBPATH)\cw32.lib $(APIOBJS)
+
+clean: mostlyclean
+	if exist $(TARGET) del $(TARGET)
+	if exist $(TARGET:.spi=.map) del $(TARGET:.spi=.map)
+
+mostlyclean:
+	if exist *.obj del *.obj
+	if exist *.res del *.res
+	if exist *.tds del *.tds
+
+.c.obj:
+	$(CC) $(CFLAGS) -c $<
+
+.c.asm :
+	$(CC) $(CFLAGS) -S $<
+
+.rc.res:
+	$(RC) $(RFLAGS) $<
+
+spientry.obj : spientry.c spibase.h
+spialloc.obj : spialloc.c spibase.h
+spiio.obj    : spiio.c    spibase.h
+ifpi.obj     : ifpi.c     spibase.h pilib.h
+piread.obj   : piread.c   pilib.h
+ifpi.res     : ifpi.rc    resource.h
+

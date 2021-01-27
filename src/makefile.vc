@@ -1,0 +1,51 @@
+#-------------------------------
+#  PI to DIB filter for Susie32
+#  makefile for MS-VC++
+#-------------------------------
+
+CC	= cl
+LD	= link
+RC	= rc
+CFLAGS	= -nologo -MT -W3 -GB -O2 -GF -DNO_CRTENV
+LDFLAGS	= -nologo -opt:nowin98 -dll -map -base:0x10400000
+RFLAGS	= 
+
+OBJS	= spientry.obj ifpi.obj spialloc.obj spiio.obj piread.obj
+LIBS	= kernel32.lib
+RES	= ifpi.res
+DEF	= ifpi.def
+TARGET	= ifpi.spi
+
+
+$(TARGET) : $(OBJS) $(RES) $(DEF)
+	$(LD) $(LDFLAGS) -out:$@ -def:$(DEF) $(OBJS) $(RES) $(LIBS)
+
+clean: mostlyclean
+	if exist $(TARGET) del $(TARGET)
+	if exist $(TARGET:.spi=.map) del $(TARGET:.spi=.map)
+
+mostlyclean:
+	if exist *.obj del *.obj
+	if exist *.res del *.res
+	if exist $(TARGET:.spi=.exp) del $(TARGET:.spi=.exp)
+	if exist $(TARGET:.spi=.lib) del $(TARGET:.spi=.lib)
+
+.c.obj::
+	$(CC) $(CFLAGS) -c $<
+
+.c.asm::
+	$(CC) $(CFLAGS) -c -FoNUL -FA $<
+
+.c.lst:
+	$(CC) $(CFLAGS) -c -FoNUL -FAc -Fa$*.lst $<
+
+.rc.res:
+	$(RC) $(RFLAGS) $<
+
+spientry.obj : spientry.c spibase.h
+spialloc.obj : spialloc.c spibase.h
+spiio.obj    : spiio.c    spibase.h
+ifpi.obj     : ifpi.c     spibase.h pilib.h
+piread.obj   : piread.c   pilib.h
+ifpi.res     : ifpi.rc    resource.h
+

@@ -1,0 +1,69 @@
+#---------------------------------
+#  PI to DIB filter for Susie32
+#  makefile for MinGW
+#---------------------------------
+
+CC	= gcc
+LD	= gcc
+AS	= as
+RC	= windres
+# For gcc 3.4.x
+CFLAGS	= -Wall -pedantic -O3 -fno-inline-functions -fomit-frame-pointer \
+	  -mtune=pentium2 -march=i386 -mpreferred-stack-boundary=2 \
+	  -Ddllimport=unused -DSPI_IMPLEMENT_DLLMAIN $(CFG)
+# For gcc 3.3.x
+#CFLAGS	= -Wall -pedantic -O3 -fno-inline-functions -fomit-frame-pointer \
+#	  -mcpu=pentium2 -march=i386 -mpreferred-stack-boundary=2 \
+#	  -Ddllimport=unused -DSPI_IMPLEMENT_DLLMAIN $(CFG)
+RFLAGS  = -l0
+LDFLAGS	= -Wall -pedantic -s -shared -nostartfiles -e _DllMain@12 \
+	  -Wl,--image-base,0x10400000 -Wl,--subsystem,windows \
+	  -Wl,--enable-stdcall-fixup
+MAP	= -Wl,-Map,$(TARGET:.spi=.map)
+
+OBJS	= spientry.o ifpi.o spialloc.o spiio.o piread.o memmove.o memcpy.o \
+	  memset.o
+RESOBJ	= resource.o
+RES	= ifpi.res
+DEF	= ifpi.def
+TARGET	= ifpi.spi
+
+$(TARGET): $(OBJS) $(RESOBJ) $(DEF)
+	$(LD) $(LDFLAGS) $(MAP) -o $@ $(OBJS) $(RESOBJ) $(DEF)
+
+$(RESOBJ) : $(RES)
+	windres -J res -O coff -o $@ $<
+
+clean: mostlyclean
+	if exist $(TARGET) del $(TARGET)
+	if exist $(TARGET:.spi=.map) del $(TARGET:.spi=.map)
+
+mostlyclean:
+	if exist *.o   del *.o
+	if exist *.res del *.res
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c $<
+
+%.s : %.c
+	$(CC) $(CFLAGS) -S -fverbose-asm -masm=intel $<
+
+%.lst : %.s
+	$(CC) -Wa,-als=$@ -c -o NUL $<
+
+%.o : %.s
+	$(AS) -o $@ $<
+
+%.res : %.rc
+	$(RC) $(RFLAGS) -fo$@ $<
+
+spientry.o : spientry.c spibase.h
+spialloc.o : spialloc.c spibase.h
+spiio.o    : spiio.c    spibase.h
+ifpi.o     : ifpi.c     spibase.h pilib.h
+piread.o   : piread.c   pilib.h
+ifpi.res   : ifpi.rc    resource.h
+memmove.o  : memmove.s
+memcpy.o   : memcpy.s
+memset.o   : memset.s
+
