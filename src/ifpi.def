@@ -7,7 +7,12 @@
 
 EXPORTS
 	GetPluginInfo   @1
-	IsSupported     @2
-	GetPictureInfo  @3
-	GetPicture      @4
-	GetPreview      @5
+	GetPluginInfoW  @2
+	IsSupported     @3
+	IsSupportedW    @4
+	GetPictureInfo  @5
+	GetPictureInfoW @6
+	GetPicture      @7
+	GetPictureW     @8
+	GetPreview      @9
+	GetPreviewW     @10

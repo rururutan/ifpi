@@ -12,7 +12,7 @@
 #include "spibase.h"
 #include "pilib.h"
 
-#define IFPI_VERSION	"0.21"		/* バージョン */
+#define IFPI_VERSION	"0.21+1"		/* バージョン */
 
 
 	/* グローバル変数 */
@@ -26,7 +26,7 @@ const LPCSTR PluginInfo[] = {	/* プラグイン情報 */
 
 
 	/* プロトタイプ宣言 */
-int IsSupportedFormat(LPBYTE, DWORD, LPSTR);
+int IsSupportedFormat(LPBYTE, DWORD, LPCSTR);
 int GetImageInfo(SPI_FILE *, PictureInfo *);
 int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, LONG_PTR);
 static void pi_read_init_io(pi_structp, SPI_FILE *);

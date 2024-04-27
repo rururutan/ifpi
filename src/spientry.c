@@ -9,6 +9,7 @@
 #define WIN32_LEAN_AND_MEAN
 
 #include <windows.h>
+#include <wchar.h>
 
 #include "spibase.h"
 
@@ -59,7 +60,10 @@ int _export PASCAL
 	LPCSTR str;
 	int n;
 
-	if (infono < 0 || infono >= NumInfo) return 0;
+	if (buf == NULL || infono < 0 || infono >= NumInfo) {
+		if (buf) buf[0] = '\0';
+		return 0;
+	}
 
 	str = PluginInfo[infono];
 	for (n = 0; n < buflen && (*(buf++) = *(str++)) != '\0'; n++) ;
@@ -71,6 +75,29 @@ int _export PASCAL
 	 * だから、バッファに余裕がある場合は、最後に '\0' を
 	 * 付けておいた方が良い。
 	 */
+
+	return n;
+}
+
+int _export PASCAL
+ GetPluginInfoW(int infono, LPWSTR buf, int buflen)
+{
+	LPCSTR str;
+	int n;
+
+	if (buf == NULL || infono < 0 || infono >= NumInfo) {
+		if (buf) buf[0] = L'\0';
+		return 0;
+	}
+
+	str = PluginInfo[infono];
+	n = _snwprintf_s(buf, buflen, _TRUNCATE, L"%hs", str);
+	if (n > buflen) {
+		n = buflen;
+	}
+	if (n < 0) {
+		n = 0;
+	}
 
 	return n;
 }
@@ -111,7 +138,7 @@ int _export PASCAL
 ** ----- 展開可能な(対応している)ファイル形式か調べる --------------------
 */
 int _export PASCAL
- IsSupported(LPSTR filename, void* dw)
+ IsSupported(LPCSTR filename, void* dw)
 {
 	BYTE buf[2048];
 	LPBYTE pbuf;
@@ -128,12 +155,17 @@ int _export PASCAL
 	return IsSupportedFormat(pbuf, rbytes, filename);
 }
 
+int _export PASCAL
+ IsSupportedW(LPCWSTR filename, void* variant)
+{
+	return IsSupported(NULL, variant);
+}
 
 /*
 ** ----- 画像ファイルに関する情報を得る ----------------------------------
 */
 int _export PASCAL
- GetPictureInfo(LPSTR buf, LONG_PTR len, unsigned int flag, PictureInfo *lpInfo)
+ GetPictureInfo(LPCSTR buf, LONG_PTR len, unsigned int flag, PictureInfo *lpInfo)
 {
 	SPI_FILE f;
 	int err;
@@ -148,13 +180,29 @@ int _export PASCAL
 	return err;
 }
 
+int _export PASCAL
+ GetPictureInfoW(LPCWSTR buf, LONG_PTR len, unsigned int flag, PictureInfo *lpInfo)
+{
+	SPI_FILE f;
+	int err;
+
+	err = SpiOpenW(&f, buf, len, flag);
+	if (err != SPI_ERROR_SUCCESS) return err;
+
+	err = GetImageInfo(&f, lpInfo);
+
+	SpiClose(&f);
+
+	return err;
+}
+
 
 /*
 ** ----- 画像を展開する --------------------------------------------------
 */
 int _export PASCAL
- GetPicture(LPSTR buf, LONG_PTR len, unsigned int flag, HANDLE *pHBInfo,
-            HANDLE *pHBm, FARPROC lpProgCallback, LONG_PTR lData)
+ GetPicture(LPCSTR buf, LONG_PTR len, unsigned int flag, HLOCAL *pHBInfo,
+            HLOCAL *pHBm, SUSIE_PROGRESS lpProgCallback, LONG_PTR lData)
 {
 	SPI_FILE f;
 	int err;
@@ -173,19 +221,61 @@ int _export PASCAL
 	return err;
 }
 
+int _export PASCAL
+GetPictureW(LPCWSTR buf, LONG_PTR len, unsigned int flag, HLOCAL *pHBInfo,
+            HLOCAL *pHBm, SUSIE_PROGRESS lpProgCallback, LONG_PTR lData)
+{
+	SPI_FILE f;
+	int err;
+
+	err = SpiOpenW(&f, buf, len, flag);
+	if (err != SPI_ERROR_SUCCESS) return err;
+
+#ifdef SPI_IMPLEMENT_GETPREVIEW
+	err = GetImage(&f, pHBInfo, pHBm, (SPIPROC)lpProgCallback, lData, FALSE);
+#else
+	err = GetImage(&f, pHBInfo, pHBm, (SPIPROC)lpProgCallback, lData);
+#endif
+
+	SpiClose(&f);
+
+	return err;
+}
+
 
 /*
 ** ----- プレビュー・カタログ表示用画像縮小展開ルーティン ----------------
 */
 int _export PASCAL
- GetPreview(LPSTR buf, LONG_PTR len, unsigned int flag, HANDLE *pHBInfo,
-            HANDLE *pHBm, FARPROC lpProgCallback, LONG_PTR lData)
+ GetPreview(LPCSTR buf, LONG_PTR len, unsigned int flag, HLOCAL *pHBInfo,
+            HLOCAL *pHBm, SUSIE_PROGRESS lpProgCallback, LONG_PTR lData)
 {
 #ifdef SPI_IMPLEMENT_GETPREVIEW
 	SPI_FILE f;
 	int err;
 
 	err = SpiOpen(&f, buf, len, flag);
+	if (err != SPI_ERROR_SUCCESS) return err;
+
+	err = GetImage(&f, pHBInfo, pHBm, (SPIPROC)lpProgCallback, lData, TRUE);
+
+	SpiClose(&f);
+
+	return err;
+#else
+	return SPI_ERROR_NOT_IMPLEMENTED;
+#endif
+}
+
+int _export PASCAL
+ GetPreviewW(LPCWSTR buf, LONG_PTR len, unsigned int flag, HLOCAL *pHBInfo,
+            HLOCAL *pHBm, SUSIE_PROGRESS lpProgCallback, LONG_PTR lData)
+{
+#ifdef SPI_IMPLEMENT_GETPREVIEW
+	SPI_FILE f;
+	int err;
+
+	err = SpiOpenW(&f, buf, len, flag);
 	if (err != SPI_ERROR_SUCCESS) return err;
 
 	err = GetImage(&f, pHBInfo, pHBm, (SPIPROC)lpProgCallback, lData, TRUE);

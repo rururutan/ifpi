@@ -137,6 +137,9 @@ typedef int (CALLBACK *SPIPROC) (int, int, LONG_PTR);
 extern HINSTANCE ghThisInst;	/* Handle to the DLL's instance. */
 #endif
 
+// コールバック
+typedef int (__stdcall *SUSIE_PROGRESS)(int nNum, int nDenom, LONG_PTR lData);
+
 	/* プロトタイプ宣言 */
 #ifdef SPI_IMPLEMENT_DLLMAIN
 # if defined(__RSXNT__)
@@ -150,12 +153,19 @@ BOOL WINAPI DllMain(HINSTANCE, DWORD, LPVOID);
 int _export PASCAL ConfigurationDlg(HWND, int);
 #endif
 int _export PASCAL GetPluginInfo(int, LPSTR, int);
-int _export PASCAL IsSupported(LPSTR, void*);
-int _export PASCAL GetPictureInfo(LPSTR, LONG_PTR, unsigned int, PictureInfo *);
-int _export PASCAL GetPicture(LPSTR, LONG_PTR, unsigned int, HANDLE *, HANDLE *,
-                              FARPROC, LONG_PTR);
-int _export PASCAL GetPreview(LPSTR, LONG_PTR, unsigned int, HANDLE *, HANDLE *,
-                              FARPROC, LONG_PTR);
+int _export PASCAL GetPluginInfoW(int, LPWSTR, int);
+int _export PASCAL IsSupported(LPCSTR, void*);
+int _export PASCAL IsSupportedW(LPCWSTR, void*);
+int _export PASCAL GetPictureInfo(LPCSTR, LONG_PTR, unsigned int, PictureInfo *);
+int _export PASCAL GetPictureInfoW(LPCWSTR, LONG_PTR, unsigned int, PictureInfo *);
+int _export PASCAL GetPicture(LPCSTR, LONG_PTR, unsigned int, HLOCAL *, HLOCAL *,
+                              SUSIE_PROGRESS, LONG_PTR);
+int _export PASCAL GetPictureW(LPCWSTR, LONG_PTR, unsigned int, HLOCAL *, HLOCAL *,
+                              SUSIE_PROGRESS, LONG_PTR);
+int _export PASCAL GetPreview(LPCSTR, LONG_PTR, unsigned int, HLOCAL *, HLOCAL *,
+                              SUSIE_PROGRESS, LONG_PTR);
+int _export PASCAL GetPreviewW(LPCWSTR, LONG_PTR, unsigned int, HLOCAL *, HLOCAL *,
+                              SUSIE_PROGRESS, LONG_PTR);
 
 
 /* -----------------------------------------------------------------------
@@ -196,7 +206,7 @@ int _export PASCAL GetPreview(LPSTR, LONG_PTR, unsigned int, HANDLE *, HANDLE *,
 typedef struct {
 	UINT   flags;				/* ストリーム状態フラグ */
 	HANDLE fhandle;				/* ファイル入力のファイルハンドル */
-	LPSTR  fname;				/* ファイル入力の入力ファイル名 */
+	LPCSTR  fname;				/* ファイル入力の入力ファイル名 */
 	LONG_PTR   foffset;			/* ファイル入力の読み込み開始オフセット */
 #ifdef SPI_SUPPORT_BUFFERING
 	LONG   ffilptr;				/* ファイル入力のファイルポインタ */
@@ -208,7 +218,8 @@ typedef struct {
 } SPI_FILE;
 
 	/* プロトタイプ宣言 */
-int SpiOpen(SPI_FILE *, LPSTR, LONG_PTR, unsigned int);
+int SpiOpen(SPI_FILE *, LPCSTR, LONG_PTR, unsigned int);
+int SpiOpenW(SPI_FILE *, LPCWSTR, LONG_PTR, unsigned int);
 void SpiClose(SPI_FILE *);
 #ifdef SPI_SUPPORT_BUFFERING
 void SpiFillBuf(SPI_FILE *);
@@ -285,7 +296,7 @@ void ExecSetupDialog(HWND);
 void ExecAboutDialog(HWND);
 # endif
 #endif
-int IsSupportedFormat(LPBYTE, DWORD, LPSTR);
+int IsSupportedFormat(LPBYTE, DWORD, LPCSTR);
 int GetImageInfo(SPI_FILE *, PictureInfo *);
 #ifdef SPI_IMPLEMENT_GETPREVIEW
 int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, LONG_PTR, BOOL);

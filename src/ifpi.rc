@@ -44,12 +44,12 @@ BEGIN
     BEGIN
         BLOCK "00000000"
         BEGIN
-            VALUE "FileDescription", "Pi Plug-in for Susie32\0"
-            VALUE "FileVersion", "0.21\0"
+            VALUE "FileDescription", "Pi Plug-in for Susie32/64\0"
+            VALUE "FileVersion", "0.21+1\0"
             VALUE "InternalName", "IFPI\0"
-            VALUE "LegalCopyright", "Copyright (C) 1999-2006 MIYASAKA Masaru\0"
+            VALUE "LegalCopyright", "Copyright (C) 1999-2006 MIYASAKA Masaru 2024 Ru^3\0"
             VALUE "OriginalFilename", "IFPI.SPI\0"
-            VALUE "ProductName", "Susie 32bit Plug-in Library\0"
+            VALUE "ProductName", "Susie 32/64bit Plug-in Library\0"
         END
     END
     BLOCK "VarFileInfo"

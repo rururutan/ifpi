@@ -42,7 +42,7 @@
 /*
 **		入力ストリームのオープン
 */
-int SpiOpen(SPI_FILE *fp, LPSTR buf, LONG_PTR len, unsigned int flag)
+int SpiOpen(SPI_FILE *fp, LPCSTR buf, LONG_PTR len, unsigned int flag)
 {
 	HANDLE hFile;
 	LPBYTE pBuff;
@@ -67,6 +67,54 @@ int SpiOpen(SPI_FILE *fp, LPSTR buf, LONG_PTR len, unsigned int flag)
 		fp->flags   = SPI_IOTYPE_FILE;
 		fp->fhandle = hFile;
 		fp->fname   = buf;
+		fp->foffset = len;
+		fp->mbuffer = pBuff;
+		fp->mptr    = pBuff;
+		fp->mcount  = 0;
+		fp->msize   = 0;
+		SetFilPtr(fp, 0);		/* fp->ffilptr = 0; */
+		break;
+
+	case 1:			/* 入力がメモリバッファ */
+		fp->flags   = SPI_IOTYPE_MEMORY;
+		fp->mbuffer = (LPBYTE)buf;
+		fp->mptr    = (LPBYTE)buf;
+		fp->mcount  = len;
+		fp->msize   = len;
+		break;
+
+	default:		/* 不明な入力タイプ */
+		return SPI_ERROR_NOT_IMPLEMENTED;
+	}
+
+	return SPI_ERROR_SUCCESS;
+}
+
+int SpiOpenW(SPI_FILE *fp, LPCWSTR buf, LONG_PTR len, unsigned int flag)
+{
+	HANDLE hFile;
+	LPBYTE pBuff;
+
+	fp->flags = SPI_IOTYPE_NONE;
+
+	if (buf == NULL || len < 0) return SPI_ERROR_FILE_READ;
+
+	switch (flag & 0x07) {
+	case 0:			/* 入力がディスクファイル */
+		hFile = CreateFileW(buf, GENERIC_READ, FILE_SHARE_READ, NULL,
+		                   OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL);
+		if (hFile == INVALID_HANDLE_VALUE)
+					return SPI_ERROR_FILE_READ;
+		if (len != 0)
+			SetFilePointer(hFile, len, NULL, FILE_BEGIN);
+		pBuff = (LPBYTE)LocalAlloc(LMEM_FIXED, SPI_BUFSIZ);
+		if (pBuff == NULL) {
+			CloseHandle(hFile);
+			return SPI_ERROR_ALLOCATE_MEMORY;
+		}
+		fp->flags   = SPI_IOTYPE_FILE;
+		fp->fhandle = hFile;
+		//fp->fname   = buf;
 		fp->foffset = len;
 		fp->mbuffer = pBuff;
 		fp->mptr    = pBuff;
