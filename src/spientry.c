@@ -10,6 +10,7 @@
 
 #include <windows.h>
 #include <wchar.h>
+#include <stdio.h>
 
 #include "spibase.h"
 
@@ -66,15 +67,13 @@ int _export PASCAL
 	}
 
 	str = PluginInfo[infono];
-	for (n = 0; n < buflen && (*(buf++) = *(str++)) != '\0'; n++) ;
-	/*
-	 * Susie Plug-in の仕様上では、文字列の最後に '\0' は
-	 * 必要ないようだが、Plug-in を利用する他のソフトの中には、
-	 * 文字列の最後に '\0' が存在するということを前提にして
-	 * 設計されているものもあるようである。
-	 * だから、バッファに余裕がある場合は、最後に '\0' を
-	 * 付けておいた方が良い。
-	 */
+	n = _snprintf_s(buf, buflen, _TRUNCATE, "%s", str);
+	if (n > buflen) {
+		n = buflen;
+	}
+	if (n < 0) {
+		n = 0;
+	}
 
 	return n;
 }
