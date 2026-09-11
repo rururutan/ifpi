@@ -1,29 +1,29 @@
 /*
-**  piread.c - .pi �ǂݍ��݃��C�u���� ver.3.10a (Nov 24, 2004)
+**  piread.c - .pi 読み込みライブラリ ver.3.10a (Nov 24, 2004)
 **
 **  Copyright(C) 1999-2004 MIYASAKA Masaru <alkaid@coral.ocn.ne.jp>
 **
 **  For conditions of distribution and use, see copyright notice in pilib.h
 **
-**  �g�p�E�z�z�����ɂ��ẮApilib.h �̒��̒��쌠�\�������Ă��������B
+**  使用・配布条件については、pilib.h の中の著作権表示を見てください。
 */
 
 #define PI_INTERNAL
 #include "pilib.h"
 
-	/* �J���[�R�[�h�e�[�u��(256�F�p)�̃r�b�g�� (7�`14)
-	 * �r�b�g�o�b�t�@�̕ۏ؃r�b�g�� (bitsof(pi_bitbuf) - 7) �ȉ�
-	 * �ł���K�v������(see pi_read_fill_bitbuf())�B
-	 * ���ۂ̃J���[�R�[�h�́A����90%�ȏオ9�r�b�g���ȉ��Ȃ̂ŁA
-	 * �����ł� 9 �ɂ��Ă���B */
+	/* カラーコードテーブル(256色用)のビット数 (7～14)
+	 * ビットバッファの保証ビット数 (bitsof(pi_bitbuf) - 7) 以下
+	 * である必要がある(see pi_read_fill_bitbuf())。
+	 * 実際のカラーコードは、その90%以上が9ビット長以下なので、
+	 * ここでは 9 にしている。 */
 #define PI_READ_CLRCODE_TABLE_BITS	9
 
-	/* �A�����R�[�h�e�[�u���̃r�b�g�� (1�`CHAR_BIT) */
+	/* 連鎖数コードテーブルのビット数 (1～CHAR_BIT) */
 #define PI_READ_LENCODE_TABLE_BITS	CHAR_BIT
 
-	/* pi_read_color() �̃J���[�e�[�u���X�V�̕��@��؂�ւ���臒l
-	 * �œK�l�́A�v���Z�b�T��R���p�C��(�R���p�C���I�v�V�����̏��)�A
-	 * pi_memmove �̎����ɂ���� ���Ȃ�قȂ�B */
+	/* pi_read_color() のカラーテーブル更新の方法を切り替える閾値
+	 * 最適値は、プロセッサやコンパイラ(コンパイルオプションの状態)、
+	 * pi_memmove の実装によって かなり異なる。 */
 #if !defined(PI_READ_COLOR_THRESHOLD) || \
     (PI_READ_COLOR_THRESHOLD < 1 || PI_READ_COLOR_THRESHOLD > 256)
 #undef PI_READ_COLOR_THRESHOLD
@@ -31,7 +31,7 @@
 #endif
 
 
-	/* �v���g�^�C�v�錾 */
+	/* プロトタイプ宣言 */
 #ifdef PI_READ_SUPPORT_EXTINFO
 static void FASTCALL pi_read_extinfo(pi_structp, pi_uint);
 #endif
@@ -70,28 +70,28 @@ static pi_size_t pi_read_iofunc_stdio(pi_structp);
 
 
 /* ***********************************************************************
-**		pi_struct �\���̂̏������E�I������
+**		pi_struct 構造体の初期化・終了処理
 */
 
 /*
-**		�\���̂̏�����
+**		構造体の初期化
 */
 void pi_read_init(pi_structp pi_ptr)
 {
 #ifdef PI_INIT_STRUCT_BY_MEMSET
 	pi_memset(pi_ptr, 0, sizeof(pi_struct));
 #else
-	static const pi_struct new_pi;	/* �J�n���� 0 (NULL) �ɏ���������� */
+	static const pi_struct new_pi;	/* 開始時に 0 (NULL) に初期化される */
 	*pi_ptr = new_pi;
 #endif
 #if (PI_OK != 0)
-	PI_RESETERR(pi_ptr);	/* �G���[�̃��Z�b�g */
+	PI_RESETERR(pi_ptr);	/* エラーのリセット */
 #endif
 }
 
 
 /*
-**		�\���̂Ɋ֘A�Â����Ă��郁�������������(�I������)
+**		構造体に関連づけられているメモリを解放する(終了処理)
 */
 void pi_read_end(pi_structp pi_ptr)
 {
@@ -104,7 +104,7 @@ void pi_read_end(pi_structp pi_ptr)
 
 
 /* ***********************************************************************
-**		�t�@�C���w�b�_�̓ǂݍ���
+**		ファイルヘッダの読み込み
 */
 
 #define pi_hi_uint16(v)   ((v)>>16 & 0xFFFF)
@@ -114,7 +114,7 @@ void pi_read_end(pi_structp pi_ptr)
                            (pi_uint32)(b)[2]<<8 | (pi_uint32)(b)[3])
 
 /*
-**		�w�b�_��ǂݍ���
+**		ヘッダを読み込む
 */
 void pi_read_header(pi_structp pi_ptr, pi_uint flag)
 {
@@ -147,18 +147,18 @@ void pi_read_header(pi_structp pi_ptr, pi_uint flag)
 	while (pi_read_byte(pi_ptr) != 0) ;
 	pi_read_bytes(pi_ptr, buf, 10);
 	PI_CHKERR_RETURN(pi_ptr);
-	pi_ptr->mode     = buf[0];					/* �摜���[�h */
-	pi_ptr->aspect_x = buf[1];					/* �A�X�y�N�g�� */
+	pi_ptr->mode     = buf[0];					/* 画像モード */
+	pi_ptr->aspect_x = buf[1];					/* アスペクト比 */
 	pi_ptr->aspect_y = buf[2];
-	pi_ptr->bitdepth = buf[3];					/* �F�[�x(4 or 8) */
-	pi_memcpy(pi_ptr->machine, buf+4, 4);		/* �@�펯�ʎq */
+	pi_ptr->bitdepth = buf[3];					/* 色深度(4 or 8) */
+	pi_memcpy(pi_ptr->machine, buf+4, 4);		/* 機種識別子 */
 
 	if (pi_ptr->bitdepth != 4 && pi_ptr->bitdepth != 8)
 		PI_SETERR_RETURN(pi_ptr, PI_ERR_INVALID_BITDEPTH);
 
-	pi_ptr->colors = 1 << pi_ptr->bitdepth;		/* �F��(16 or 256) */
+	pi_ptr->colors = 1 << pi_ptr->bitdepth;		/* 色数(16 or 256) */
 
-	n = pi_get_uint16(buf+8);		/* �@��ˑ���� or �g����� */
+	n = pi_get_uint16(buf+8);		/* 機種依存情報 or 拡張情報 */
 #ifdef PI_READ_SUPPORT_EXTINFO
 	pi_read_extinfo(pi_ptr, n);
 #else
@@ -166,8 +166,8 @@ void pi_read_header(pi_structp pi_ptr, pi_uint flag)
 		(void)pi_read_byte(pi_ptr);
 #endif
 	pi_read_bytes(pi_ptr, buf, 4);
-	pi_ptr->width  = pi_get_uint16(buf);		/* �摜�̕� */
-	pi_ptr->height = pi_get_uint16(buf+2);		/* �摜�̍��� */
+	pi_ptr->width  = pi_get_uint16(buf);		/* 画像の幅 */
+	pi_ptr->height = pi_get_uint16(buf+2);		/* 画像の高さ */
 
 	if (pi_ptr->width  == 0) PI_SETERR_RETURN(pi_ptr, PI_ERR_INVALID_WIDTH);
 	if (pi_ptr->height == 0) PI_SETERR_RETURN(pi_ptr, PI_ERR_INVALID_HEIGHT);
@@ -175,32 +175,32 @@ void pi_read_header(pi_structp pi_ptr, pi_uint flag)
 
 
 /* -----------------------------------------------------------------------
-**		.PI �t�@�C���g�����̎擾
+**		.PI ファイル拡張情報の取得
 */
 
 #ifdef PI_READ_SUPPORT_EXTINFO
 
 /*
-**		�g�������擾����
+**		拡張情報を取得する
 **
-**		�g�����́A�ȉ��ɋ����� Short format / Normal format ��
-**		�f�[�^�u���b�N��A�����Ď��߂��`���ɂȂ��Ă���B
-**		�Ǝ��̊g���f�[�^��Pi�t�@�C���ɖ��ߍ��݂����ꍇ�́A1�o�C�g�ڂ�
-**		�p�������̃f�[�^ID����������� Normal format ���g���ׂ��Ƃ̂��ƁB
-**		����ȊO�̌`���̃f�[�^�u���b�N�͐����Ȋg���������߂�̂Ɏg���B
+**		拡張情報は、以下に挙げる Short format / Normal format の
+**		データブロックを連続して収めた形式になっている。
+**		独自の拡張データをPiファイルに埋め込みたい場合は、1バイト目が
+**		英小文字のデータID文字列を持つ Normal format を使うべきとのこと。
+**		それ以外の形式のデータブロックは正式な拡張情報を収めるのに使う。
 **
 **		  |====== Short format  ======
 **		  |Offset  Size    Description
-**		  | 00h    BYTE    ID       ; �f�[�^ID(0x00..0x1F)
-**		  | 01h  4 BYTEs   data     ; �f�[�^�{��
+**		  | 00h    BYTE    ID       ; データID(0x00..0x1F)
+**		  | 01h  4 BYTEs   data     ; データ本体
 **		  |
 **		  |====== Normal format ======
 **		  |Offset  Size    Description
-**		  | 00h  4 BYTEs   IDstring ; �f�[�^ID������(����\����x4)
-**		  |                         ; 1�o�C�g�ڂ͉p���ł��邱��
-**		  | 04h    WORD    datasize ; �f�[�^�{�̂̃o�C�g��
-**		  |                         ; (big-endien 2�o�C�g����)
-**		  | 06h  N BYTEs   data     ; �f�[�^�{��
+**		  | 00h  4 BYTEs   IDstring ; データID文字列(印刷可能文字x4)
+**		  |                         ; 1バイト目は英字であること
+**		  | 04h    WORD    datasize ; データ本体のバイト数
+**		  |                         ; (big-endien 2バイト整数)
+**		  | 06h  N BYTEs   data     ; データ本体
 **
 */
 static void FASTCALL
@@ -221,19 +221,19 @@ static void FASTCALL
 			t = pi_get_uint32(buf+1);
 
 			switch (c) {
-			case 0x01:			/* �摜�̕\���J�n�_(X,Y) */
+			case 0x01:			/* 画像の表示開始点(X,Y) */
 				pi_ptr->offset_x = (pi_uint)pi_hi_uint16(t);
 				pi_ptr->offset_y = (pi_uint)pi_lo_uint16(t);
 				break;
-			case 0x02:			/* �����F�ɂȂ�p���b�g�ԍ� (0�`15/255) */
+			case 0x02:			/* 透明色になるパレット番号 (0～15/255) */
 				if (t < pi_ptr->colors)
 					pi_ptr->transcolor = (pi_int)t;
 				break;
-			case 0x03:			/* �p���b�g�̗L���r�b�g�� (1�`8) */
+			case 0x03:			/* パレットの有効ビット数 (1～8) */
 				if (t > 0 && t <= 8)
 					pi_ptr->sigbits   = (pi_int)t;
 				break;
-			case 0x04:			/* �p���b�g�̎g�p�� (1�`16/256) */
+			case 0x04:			/* パレットの使用個数 (1～16/256) */
 				if (t > 0 && t <= pi_ptr->colors)
 					pi_ptr->colorused = (pi_int)t;
 				break;
@@ -249,7 +249,7 @@ static void FASTCALL
 			len -= n;
 
 			if (/*memcmp(buf,"keyw",4)==0*/ 0) {
-				/* �K�� n �o�C�g�S����ǂނ��� */
+				/* 必ず n バイト全部を読むこと */
 				for ( ; n > 0; n--)
 					(void)pi_read_byte(pi_ptr);
 			} else {
@@ -260,7 +260,7 @@ static void FASTCALL
 			break;
 		}
 	}
-	for ( ; len > 0; len--) {		/* �g�����ł͂Ȃ��f�[�^(�@��ˑ����) */
+	for ( ; len > 0; len--) {		/* 拡張情報ではないデータ(機種依存情報) */
 		(void)pi_read_byte(pi_ptr);
 	}
 }
@@ -269,13 +269,13 @@ static void FASTCALL
 
 
 /* -----------------------------------------------------------------------
-**		�����R�����g�̏���
+**		内蔵コメントの処理
 */
 
 #ifdef PI_READ_SUPPORT_COMMENT
 
 /*
-**		�����R�����g���R�����g�o�b�t�@�ɓǂݍ���
+**		内蔵コメントをコメントバッファに読み込む
 */
 static void FASTCALL
  pi_read_comment(pi_structp pi_ptr, pi_int discard)
@@ -306,7 +306,7 @@ static void FASTCALL
 
 
 /*
-**		�����R�����g���R�����g�o�b�t�@����R�s�[����
+**		内蔵コメントをコメントバッファからコピーする
 */
 void pi_read_get_comment(pi_structp pi_ptr, pi_charp buf, pi_int freebuf)
 {
@@ -324,7 +324,7 @@ void pi_read_get_comment(pi_structp pi_ptr, pi_charp buf, pi_int freebuf)
 
 
 /*
-**		�R�����g�o�b�t�@�̃��������������
+**		コメントバッファのメモリを解放する
 */
 static void FASTCALL
  pi_read_free_comment(pi_structp pi_ptr)
@@ -344,28 +344,28 @@ static void FASTCALL
 
 
 /* ***********************************************************************
-**		�p���b�g�̓ǂݍ���
+**		パレットの読み込み
 */
 
-	/* �J���[�\���̃A�N�Z�X�p�}�N��(�f�t�H���g��`) */
+	/* カラー構造体アクセス用マクロ(デフォルト定義) */
 #ifndef pi_set_color
 #define pi_set_color(p,r,g,b) \
             ((p)->red = (r), (p)->green = (g), (p)->blue = (b))
 #endif
 
 /*
-**		�p���b�g��ǂݍ���
+**		パレットを読み込む
 */
 void pi_read_palette(pi_structp pi_ptr, pi_colorp pal)
 {
 	static const pi_byte def4pal[2][2] = {
-		{0x00, 0x77}, {0x00, 0xFF}	/* 16�F�f�t�H���g�p���b�g */
+		{0x00, 0x77}, {0x00, 0xFF}	/* 16色デフォルトパレット */
 	};
 	static const pi_byte def8pal2[4] = {
-		0x00, 0x55, 0xAA, 0xFF	/* 256�F�f�t�H���g�p���b�g(B) */
+		0x00, 0x55, 0xAA, 0xFF	/* 256色デフォルトパレット(B) */
 	};
 	static const pi_byte def8pal3[8] = {
-		0x00, 0x24, 0x49, 0x6D,	/* 256�F�f�t�H���g�p���b�g(R,G) */
+		0x00, 0x24, 0x49, 0x6D,	/* 256色デフォルトパレット(R,G) */
 		0x92, 0xB6, 0xDB, 0xFF
 	};
 	pi_byte buf[3];
@@ -374,7 +374,7 @@ void pi_read_palette(pi_structp pi_ptr, pi_colorp pal)
 	PI_CHKERR_RETURN(pi_ptr);
 
 	if (pi_ptr->mode & PI_MODE_NO_PALETTE) {
-		/* �f�t�H���g�p���b�g�g�p */
+		/* デフォルトパレット使用 */
 		if (pi_ptr->bitdepth == 8) {
 			for (i = 0; i < 256; i++) {
 				pi_set_color(pal, def8pal3[(i >> 2) & 0x07],
@@ -403,7 +403,7 @@ void pi_read_palette(pi_structp pi_ptr, pi_colorp pal)
 
 
 /* ***********************************************************************
-**		�C���[�W�̓ǂݏo����������n��
+**		イメージの読み出し準備＆後始末
 */
 
 #define PI_POS_COLOR	(6)
@@ -423,7 +423,7 @@ void pi_read_palette(pi_structp pi_ptr, pi_colorp pal)
 
 
 /*
-**		�C���[�W�̓ǂݏo���J�n(����)
+**		イメージの読み出し開始(準備)
 */
 void pi_read_row_init(pi_structp pi_ptr)
 {
@@ -437,7 +437,7 @@ void pi_read_row_init(pi_structp pi_ptr)
 
 
 /*
-**		�C���[�W�̓ǂݍ��ݏI��(��n��)
+**		イメージの読み込み終了(後始末)
 */
 static void FASTCALL
  pi_read_row_end(pi_structp pi_ptr)
@@ -450,14 +450,14 @@ static void FASTCALL
 
 
 /* -----------------------------------------------------------------------
-**		�e��R�[�h�e�[�u������Ɨp�o�b�t�@�̏�����
+**		各種コードテーブル＆作業用バッファの初期化
 */
 
 /*
-**		�J���[�e�[�u���̏�����
+**		カラーテーブルの初期化
 **
 **	==============================================
-**	| ���ׂ̐F | �J���[�e�[�u�� (16�F�p)
+**	| 左隣の色 | カラーテーブル (16色用)
 **	+----------+----------------------------------
 **	|     0    | 0,F,E,D,C,B,A,9,8,7,6,5,4,3,2,1
 **	|     1    | 1,0,F,E,D,C,B,A,9,8,7,6,5,4,3,2
@@ -497,26 +497,26 @@ static void FASTCALL
 
 
 /*
-**		�J���[�R�[�h�e�[�u���̏�����
+**		カラーコードテーブルの初期化
 **
 **	======================================
-**	|   �F�R�[�h |������| ���� (16�F�p)
+**	|   色コード |符号長| 符号 (16色用)
 **	+------------+------+-----------------
-**	|    0�`1    |   2  | 1x
-**	|    2�`3    |   3  | 00x
-**	|    4�`7    |   5  | 010xx
-**	|    8�`15   |   6  | 011xxx
+**	|    0～1    |   2  | 1x
+**	|    2～3    |   3  | 00x
+**	|    4～7    |   5  | 010xx
+**	|    8～15   |   6  | 011xxx
 **	======================================
-**	|   �F�R�[�h |������| ���� (256�F�p)
+**	|   色コード |符号長| 符号 (256色用)
 **	+------------+------+-----------------
-**	|    0�`  1  |   2  | 1x
-**	|    2�`  3  |   3  | 00x
-**	|    4�`  7  |   5  | 010xx
-**	|    8�` 15  |   7  | 0110xxx
-**	|   16�` 31  |   9  | 01110xxxx
-**	|   32�` 63  |  11  | 011110xxxxx
-**	|   64�`127  |  13  | 0111110xxxxxx
-**	|  128�`255  |  14  | 0111111xxxxxxx
+**	|    0～  1  |   2  | 1x
+**	|    2～  3  |   3  | 00x
+**	|    4～  7  |   5  | 010xx
+**	|    8～ 15  |   7  | 0110xxx
+**	|   16～ 31  |   9  | 01110xxxx
+**	|   32～ 63  |  11  | 011110xxxxx
+**	|   64～127  |  13  | 0111110xxxxxx
+**	|  128～255  |  14  | 0111111xxxxxxx
 **	======================================
 */
 static void FASTCALL
@@ -555,25 +555,25 @@ static void FASTCALL
 
 
 /*
-**		�A�����R�[�h�e�[�u���̏�����
+**		連鎖数コードテーブルの初期化
 **
 **	===================================================
-**	|   �A����   |������| ����
+**	|   連鎖数   |符号長| 符号
 **	+------------+------+---------+--------------------
 **	|    1       |   1  | 0
-**	|    2�`   3 |   3  | 10x
-**	|    4�`   7 |   5  | 110xx
-**	|    8�`  15 |   7  | 1110xxx
-**	|   16�`  31 |   9  | 11110xxx x
-**	|   32�`  63 |  11  | 111110xx xxx
-**	|   64�` 127 |  13  | 1111110x xxxxx
-**	|  128�` 255 |  15  | 11111110 xxxxxxx
+**	|    2～   3 |   3  | 10x
+**	|    4～   7 |   5  | 110xx
+**	|    8～  15 |   7  | 1110xxx
+**	|   16～  31 |   9  | 11110xxx x
+**	|   32～  63 |  11  | 111110xx xxx
+**	|   64～ 127 |  13  | 1111110x xxxxx
+**	|  128～ 255 |  15  | 11111110 xxxxxxx
 **	+------------+------+---------+--------------------
-**	|  256�` 511 |  17  | 11111111 0 xxxxxxxx
-**	|  512�`1023 |  19  | 11111111 10x xxxxxxxx
-**	| 1024�`2047 |  21  | 11111111 110xx xxxxxxxx
-**	| 2048�`4095 |  23  | 11111111 1110xxx xxxxxxxx
-**	| 4096�`8191 |  25  | 11111111 11110xxxx xxxxxxxx
+**	|  256～ 511 |  17  | 11111111 0 xxxxxxxx
+**	|  512～1023 |  19  | 11111111 10x xxxxxxxx
+**	| 1024～2047 |  21  | 11111111 110xx xxxxxxxx
+**	| 2048～4095 |  23  | 11111111 1110xxx xxxxxxxx
+**	| 4096～8191 |  25  | 11111111 11110xxxx xxxxxxxx
 **	|    ....    |  ..  | ....
 **	===================================================
 */
@@ -595,7 +595,7 @@ static void FASTCALL
 		c  &= SIZE - 1;
 		c  |= SIZE;
 		c >>= BITS - b;
-		c  &= SIZE - 1;		/* �f�R�[�h�s�\(i == SIZE-1)�̎��� c = 0 �Ƃ��� */
+		c  &= SIZE - 1;		/* デコード不能(i == SIZE-1)の時は c = 0 とする */
 		code[i]    = c;
 		codelen[c] = 2 * b + 1;
 	}
@@ -603,7 +603,7 @@ static void FASTCALL
 
 
 /*
-**		�s�o�b�t�@�̏�����
+**		行バッファの初期化
 */
 static void FASTCALL
  pi_read_init_rowbuf(pi_structp pi_ptr)
@@ -614,11 +614,11 @@ static void FASTCALL
 	PI_CHKERR_RETURN(pi_ptr);
 
 	/*
-	 *	�S�s���̍s�o�b�t�@���g���̂́A.pi �̏����P��(2pixels)��
-	 *	�s�o�b�t�@�̐؂�ڂɂ܂�����Ȃ��悤�ɂ��邽�߁B��������ƁA
-	 *	�摜�̕�����ł���悤�ȉ摜�����܂��������Ƃ��ł���B
-	 *	�c��� 6pixels �́A�s�o�b�t�@�̐؂�ڂ̉e�������Ȃ�����
-	 *	���߂̂��́B
+	 *	４行分の行バッファを使うのは、.pi の処理単位(2pixels)が
+	 *	行バッファの切れ目にまたがらないようにするため。こうすると、
+	 *	画像の幅が奇数であるような画像もうまく扱うことができる。
+	 *	残りの 6pixels は、行バッファの切れ目の影響を少なくする
+	 *	ためのもの。
 	 */
 	pi_ptr->rowbuf = pi_alloc_memory(pi_ptr, (pi_size_t)pi_ptr->width * 4 + 6);
 	PI_CHKERR_RETURN(pi_ptr);
@@ -635,7 +635,7 @@ static void FASTCALL
 
 
 /* ***********************************************************************
-**		�C���[�W�{�̂̓ǂݍ���
+**		イメージ本体の読み込み
 */
 
 #ifdef PI_READ_OUTPUT_8BPP_FMT
@@ -649,7 +649,7 @@ static void FASTCALL
 #ifdef PI_READ_SUPPORT_READIMAGE
 
 /*
-**		�C���[�W�S�̂���x�ɓǂݍ���
+**		イメージ全体を一度に読み込む
 */
 void pi_read_image(pi_structp pi_ptr, pi_bytepp rowptr)
 {
@@ -660,10 +660,10 @@ void pi_read_image(pi_structp pi_ptr, pi_bytepp rowptr)
 #endif /* PI_READ_SUPPORT_READIMAGE */
 
 /*
-**		�C���[�W�̈�s��ǂݍ���
+**		イメージの一行を読み込む
 **
-**		�s�̓ǂݍ��݂ɐ��������ꍇ�� 1 ��Ԃ��B�G���[����������
-**		�ꍇ��A����ȏ�ǂނׂ��s���Ȃ��ꍇ�� 0 ��Ԃ��B
+**		行の読み込みに成功した場合は 1 を返す。エラーが発生した
+**		場合や、これ以上読むべき行がない場合は 0 を返す。
 */
 int pi_read_row(pi_structp pi_ptr, pi_bytep row)
 {
@@ -701,7 +701,7 @@ int pi_read_row(pi_structp pi_ptr, pi_bytep row)
 #ifndef PI_READ_OUTPUT_8BPP_FMT
 
 /*
-**		�C���[�W�̈�s���R�s�[����(16�F�摜�p)
+**		イメージの一行をコピーする(16色画像用)
 */
 static void FASTCALL
  pi_read_rowcpy4(pi_bytep dst, pi_bytep src, pi_size_t cnt)
@@ -718,7 +718,7 @@ static void FASTCALL
 #endif /* PI_READ_OUTPUT_8BPP_FMT */
 
 /*
-**		�����J���[(2�F)���t�@�C������ǂ݁A��Q�s���̍s�o�b�t�@������������
+**		初期カラー(2色)をファイルから読み、上２行分の行バッファを初期化する
 */
 static void FASTCALL
  pi_read_initial_colors(pi_structp pi_ptr)
@@ -733,7 +733,7 @@ static void FASTCALL
 		*(--p) = d;
 		*(--p) = c;
 		/*
-		 *	��Q�s���̍s�o�b�t�@���A�����Ă���K�v����B
+		 *	上２行分の行バッファが連続している必要あり。
 		 *	(see pi_read_init_rowbuf)
 		 */
 	}
@@ -741,7 +741,7 @@ static void FASTCALL
 
 
 /*
-**		�s�o�b�t�@�̃��[�e�[�g
+**		行バッファのローテート
 */
 static void FASTCALL
  pi_read_rotate_rowbuf(pi_structp pi_ptr)
@@ -763,21 +763,21 @@ static void FASTCALL
 	for (i = 0; i < 6; i++)
 		pi_ptr->posdiff[i] = pi_ptr->rowptr[posy[i]] - row0 + posx[i];
 
-		/* �d�ˍ��킹���s�Ȃ����߁A�Q�s�N�Z�������ǂށB */
+		/* 重ね合わせを行なうため、２ピクセル多く読む。 */
 	if (pi_ptr->rowptr[0] > pi_ptr->rowptr[3] &&
 	    pi_ptr->rownum < pi_ptr->height) {
 		pi_ptr->rowend += 2;
 	}
-		/* �s�o�b�t�@�̐؂�ڂ̑O��(6pixels)���d�ˍ��킹��B */
+		/* 行バッファの切れ目の前後(6pixels)を重ね合わせる。 */
 	if (pi_ptr->rowptr[1] > pi_ptr->rowptr[0]) {
 		pi_ptr->currentp -= (w = pi_ptr->width * 4);
 #ifdef PI_READ_W2_SPEC_COMPLIANT_DECODING
-		/* memmove �œ��ꂵ�Ă��ǂ��񂾂��ǁAmemcpy ��
-		 * �C�����C�������Ă����R���p�C���������̂�...�B*/
+		/* memmove で統一しても良いんだけど、memcpy を
+		 * インライン化してくれるコンパイラが多いので...。*/
 		pi_memcpy(pi_ptr->rowbuf,  (pi_ptr->rowbuf + w), 6);
 #else
-		/* ����1pixel�̏ꍇ�ɃR�s�[���ƃR�s�[�悪�d�Ȃ�̂ŁA
-		 * memmove ���g���Ă���B*/
+		/* 幅が1pixelの場合にコピー元とコピー先が重なるので、
+		 * memmove を使っている。*/
 		pi_memmove(pi_ptr->rowbuf, (pi_ptr->rowbuf + w), 6);
 #endif
 	}
@@ -785,21 +785,21 @@ static void FASTCALL
 
 
 /* -----------------------------------------------------------------------
-**		�s�N�Z���f�[�^�̓ǂݍ���
+**		ピクセルデータの読み込み
 */
 
-	/* �s�N�Z���̃R�s�[���s�Ȃ��}�N�� */
+	/* ピクセルのコピーを行なうマクロ */
 #ifdef PI_WORD_OPERATION_ON_PIXEL
-/* �v���Z�b�T�ɂ���ẮA��A�h���X�ɑ΂���16bit�A�N�Z�X���s�Ȃ��ƒx��
- * �Ȃ�ꍇ�����邽�߁A���̕��@����ɑ����Ƃ͌���Ȃ��B
- * ����ɁAx86�ȊO�̃v���Z�b�T�ł́A�A�h���X�̃A���C�������g������Ȃ�
- * �������A�N�Z�X���̂��̂��ł��Ȃ����̂�����B */
+/* プロセッサによっては、奇数アドレスに対して16bitアクセスを行なうと遅く
+ * なる場合があるため、この方法が常に速いとは限らない。
+ * さらに、x86以外のプロセッサでは、アドレスのアラインメントが合わない
+ * メモリアクセスそのものができないものもある。 */
 #define pi_cpypixel(d,s)  (((pi_uint16p)(d))[0] = ((pi_uint16p)(s))[0])
 #else
 #define pi_cpypixel(d,s)  ((d)[0] = (s)[0], (d)[1] = (s)[1])
 #endif
 
-	/* �r�b�g�o�b�t�@�֌W�}�N�� */
+	/* ビットバッファ関係マクロ */
 #define pi_getbits(p,n)   \
             (((p)->bitcnt < (pi_uint)(n)) ? pi_read_fill_bitbuf(p):(void)0, \
              (pi_uint)((p)->bitbuf >> ((p)->bitcnt -= (n))) & pi_bit1(n))
@@ -814,7 +814,7 @@ static void FASTCALL
 
 
 /*
-**		�s�N�Z���f�[�^��ǂ݁A�s�o�b�t�@�𖄂߂�
+**		ピクセルデータを読み、行バッファを埋める
 */
 static void FASTCALL
  pi_read_pixels(pi_structp pi_ptr)
@@ -824,7 +824,7 @@ static void FASTCALL
 	pi_uint pos;
 
 #ifndef PI_READ_W2_SPEC_COMPLIANT_DECODING
-	/* ����2pixel�ȉ��̏ꍇ�ɋN���肦�� */
+	/* 幅が2pixel以下の場合に起こりえる */
 	if (curp >= endp) return;
 #endif
 	for (;;) {
@@ -868,13 +868,13 @@ static void FASTCALL
 #ifdef PI_READ_W2_SPEC_COMPLIANT_DECODING
 
 /*
-**		�s�N�Z���f�[�^��ǂ݁A�s�o�b�t�@�𖄂߂�(width <= 2)
+**		ピクセルデータを読み、行バッファを埋める(width <= 2)
 **
-**		piwrite.c �̒��́u����2pixel�ȉ��̉摜�̏����@�v��
-**		pi_write_pixels_width2 �̉��(�R�����g)�����Ă��������B
-**		�����ł́Apiwrite.c �Ɠ��l�ɁAgimp-jp-plugins-20010820
-**		�Ɋ܂܂�� Pi �v���O�C�� (pi.c, PI plug-in for GIMP) ��
-**		�݊��ɂȂ�悤�ɂ��Ă���܂��B
+**		piwrite.c の中の「幅が2pixel以下の画像の処理法」と
+**		pi_write_pixels_width2 の解説(コメント)も見てください。
+**		ここでは、piwrite.c と同様に、gimp-jp-plugins-20010820
+**		に含まれる Pi プラグイン (pi.c, PI plug-in for GIMP) と
+**		互換になるようにしてあります。
 */
 static void FASTCALL
  pi_read_pixels_width2(pi_structp pi_ptr)
@@ -891,7 +891,7 @@ static void FASTCALL
 #endif /* PI_READ_W2_SPEC_COMPLIANT_DECODING */
 
 /*
-**		�ʒu�R�[�h��ǂ�
+**		位置コードを読む
 */
 static pi_uint FASTCALL
  pi_read_pos(pi_structp pi_ptr, pi_bytep curp)
@@ -922,7 +922,7 @@ static pi_uint FASTCALL
 
 
 /*
-**		�F��ǂ�
+**		色を読む
 */
 static pi_uint FASTCALL
  pi_read_color(pi_structp pi_ptr, pi_uint prev)
@@ -964,7 +964,7 @@ static pi_uint FASTCALL
 
 
 /*
-**		�A������ǂ�
+**		連鎖数を読む
 */
 static pi_uint32 FASTCALL
  pi_read_len(pi_structp pi_ptr, pi_uint bits)
@@ -982,12 +982,12 @@ static pi_uint32 FASTCALL
 
 	if (n == 0) {
 		pi_dropbits(pi_ptr, TABLE_BITS);
-		/* 11111111... �Ƃ����r�b�g�p�^�[���������ƁA�ċA�Ăяo����
-		 * ���X�Ƒ����Ă��܂��̂ŁA�r���ŃX�g�b�v������K�v������B*/
+		/* 11111111... というビットパターンが続くと、再帰呼び出しを
+		 * 延々と続けてしまうので、途中でストップさせる必要がある。*/
 		if ((bits += TABLE_BITS) < bitsof(pi_uint32))
 			n = pi_read_len(pi_ptr, bits) << TABLE_BITS;
-		else	/* ���ŏI���ʂ� UINT32_MAX �ɖO�a���������ɁA*/
-			n = (~0);		/* �ŏI���ʂ̏�ʃr�b�g���P�ɂ���B  */
+		else	/* ↓最終結果を UINT32_MAX に飽和させる代わりに、*/
+			n = (~0);		/* 最終結果の上位ビットを１にする。  */
 		n |= pi_getbits(pi_ptr, TABLE_BITS);
 	} else {
 		l = pi_ptr->lencodelen[n];
@@ -1005,11 +1005,11 @@ static pi_uint32 FASTCALL
 
 
 /* ***********************************************************************
-**		�f�[�^���͊֐� (�r�b�g�o�b�t�@�o�R)
+**		データ入力関数 (ビットバッファ経由)
 */
 
 /*
-**		�r�b�g�o�b�t�@�ɐV���ȃf�[�^��ǂݍ���
+**		ビットバッファに新たなデータを読み込む
 */
 static void FASTCALL
  pi_read_fill_bitbuf(pi_structp pi_ptr)
@@ -1022,14 +1022,14 @@ static void FASTCALL
 	while (bitcnt < bitsof(pi_bitbuf) - 7) {
 		if (iobufcnt == 0) {
 			/*
-			 * �r�b�g�o�b�t�@�̑傫����40�r�b�g�𒴂���ꍇ�A
-			 * .pi �t�@�C���̖����ɂ���_�~�[��32�r�b�g�����ł�
-			 * �r�b�g�o�b�t�@�𖞂������Ƃ��ł��Ȃ��ꍇ���o�Ă���
-			 * (EOF�G���[�ƂȂ�)�B���̂��߁A���̓o�b�t�@�����
-			 * �Ȃ������_�ŏ\���ȗL���r�b�g�����ɂ���Ȃ�΁A
-			 * �r�b�g�o�b�t�@�𖞂������ɂ��̂܂܃��^�[������B
-			 * ���ۂɂ��ꂪ���ɂȂ�̂� bitsof(pi_bitbuf) > 40
-			 * �̏ꍇ�ł��邪�A�����ł͂P�o�C�g���]�T�����Ă���B
+			 * ビットバッファの大きさが40ビットを超える場合、
+			 * .pi ファイルの末尾にあるダミーの32ビットだけでは
+			 * ビットバッファを満たすことができない場合が出てくる
+			 * (EOFエラーとなる)。そのため、入力バッファが空に
+			 * なった時点で十分な有効ビットが既にあるならば、
+			 * ビットバッファを満たさずにそのままリターンする。
+			 * 実際にこれが問題になるのは bitsof(pi_bitbuf) > 40
+			 * の場合であるが、ここでは１バイト分余裕を見ている。
 			 */
 			if (bitsof(pi_bitbuf) > 32 && bitcnt >= 32 - 7) break;
 			pi_ptr->iobufptr = iobufptr;
@@ -1051,11 +1051,11 @@ static void FASTCALL
 
 
 /* ***********************************************************************
-**		�f�[�^���͊֐� (�o�C�g�P��)
+**		データ入力関数 (バイト単位)
 */
 
 /*
-**		�ǂݍ��݃o�b�t�@�ɐV���ȃf�[�^��ǂݍ���
+**		読み込みバッファに新たなデータを読み込む
 */
 static void FASTCALL
  pi_read_fill_buffer(pi_structp pi_ptr)
@@ -1077,7 +1077,7 @@ static void FASTCALL
 
 
 /*
-**		�ǂݍ��݃o�b�t�@���� 1 �o�C�g�ǂ�
+**		読み込みバッファから 1 バイト読む
 */
 static pi_uint FASTCALL
  pi_read_byte(pi_structp pi_ptr)
@@ -1088,7 +1088,7 @@ static pi_uint FASTCALL
 
 
 /*
-**		�ǂݍ��݃o�b�t�@���� n �o�C�g�ǂ�
+**		読み込みバッファから n バイト読む
 */
 static void FASTCALL
  pi_read_bytes(pi_structp pi_ptr, pi_bytep buf, pi_size_t cnt)
@@ -1112,11 +1112,11 @@ static void FASTCALL
 
 
 /* ***********************************************************************
-**		�������̊m�ہ����
+**		メモリの確保＆解放
 */
 
 /*
-**		�������̊m��(�`�F�b�N�t��)
+**		メモリの確保(チェック付き)
 */
 static pi_voidp FASTCALL
  pi_alloc_memory(pi_structp pi_ptr, pi_size_t size)
@@ -1131,7 +1131,7 @@ static pi_voidp FASTCALL
 
 
 /*
-**		�������̉��
+**		メモリの解放
 */
 static void FASTCALL
  pi_free_memory(pi_structp pi_ptr, pi_voidp ptr)
@@ -1142,13 +1142,13 @@ static void FASTCALL
 
 
 /* ***********************************************************************
-**		�b����W�� I/O �ɂ����̓T�|�[�g�֐��Q
+**		Ｃ言語標準 I/O による入力サポート関数群
 */
 
 #ifdef PI_READ_SUPPORT_STDIO
 
 /*
-**		�f�[�^�ǂݍ��݂̏���
+**		データ読み込みの準備
 */
 void pi_read_init_io(pi_structp pi_ptr, FILE *fp)
 {
@@ -1165,7 +1165,7 @@ void pi_read_init_io(pi_structp pi_ptr, FILE *fp)
 
 
 /*
-**		�f�[�^�ǂݍ��ݏI��(��n��)
+**		データ読み込み終了(後始末)
 */
 void pi_read_end_io(pi_structp pi_ptr)
 {
@@ -1174,7 +1174,7 @@ void pi_read_end_io(pi_structp pi_ptr)
 
 
 /*
-**		�f�[�^�ǂݍ��݊֐�(stdio)
+**		データ読み込み関数(stdio)
 */
 static pi_size_t
  pi_read_iofunc_stdio(pi_structp pi_ptr)

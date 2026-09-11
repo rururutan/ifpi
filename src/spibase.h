@@ -13,38 +13,38 @@
 */
 
 	/* spientry.c */
-/* #undef SPI_IMPLEMENT_DLLMAIN */		/* DllMain() ‚ð’è‹`‚·‚é */
-#undef SPI_IMPLEMENT_DLLHANDLE		/* ghThisInst ‚ð’è‹`‚·‚é */
-#undef SPI_IMPLEMENT_INITOPTIONS	/* DllMain() ‚ÅƒIƒvƒVƒ‡ƒ“‚ð‰Šú‰»‚·‚é */
-#undef SPI_IMPLEMENT_CONFIGDLG		/* ConfigurationDlg() ‚ð’è‹`‚·‚é */
-#undef SPI_IMPLEMENT_ABOUTDLG		/* “ÆŽ©‚Ì About ƒ_ƒCƒAƒƒO‚ðŽÀ‘•‚·‚é */
-#undef SPI_IMPLEMENT_GETPREVIEW 	/* GetPreview() —p‚ÌƒR[ƒh‚ðŽÀ‘•‚·‚é */
+/* #undef SPI_IMPLEMENT_DLLMAIN */		/* DllMain() ã‚’å®šç¾©ã™ã‚‹ */
+#undef SPI_IMPLEMENT_DLLHANDLE		/* ghThisInst ã‚’å®šç¾©ã™ã‚‹ */
+#undef SPI_IMPLEMENT_INITOPTIONS	/* DllMain() ã§ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’åˆæœŸåŒ–ã™ã‚‹ */
+#undef SPI_IMPLEMENT_CONFIGDLG		/* ConfigurationDlg() ã‚’å®šç¾©ã™ã‚‹ */
+#undef SPI_IMPLEMENT_ABOUTDLG		/* ç‹¬è‡ªã® About ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’å®Ÿè£…ã™ã‚‹ */
+#undef SPI_IMPLEMENT_GETPREVIEW 	/* GetPreview() ç”¨ã®ã‚³ãƒ¼ãƒ‰ã‚’å®Ÿè£…ã™ã‚‹ */
 
 	/* spiio.c */
-#define SPI_SUPPORT_BUFFERING		/* “Ç‚Ýž‚Ýƒf[ƒ^‚Ìƒoƒbƒtƒ@ƒŠƒ“ƒO‚ðs‚¤ */
-#undef SPI_SUPPORT_SPIGETBYTE		/* SpiGetByte() ‚ð—˜—p‰Â”\‚É‚·‚é */
-#undef SPI_SUPPORT_SPIREAD			/* SpiRead() ‚ð—˜—p‰Â”\‚É‚·‚é */
-#undef SPI_SUPPORT_NULLREAD 		/* SpiRead() ‚Å‚Ì‹ó“Ç‚Ý“®ì‚ð—LŒø‚É‚·‚é */
-#undef SPI_SUPPORT_SPISEEK			/* SpiSeek() ‚ð—˜—p‰Â”\‚É‚·‚é */
-#undef SPI_SUPPORT_EOFFLAG			/* EOF ‚ð•\‚·ƒtƒ‰ƒO‚ð—˜—p‰Â”\‚É‚·‚é */
-#undef SPI_OPTIMIZE_SPIREAD 		/* Å“K‰»‚³‚ê‚½ SpiRead() ‚ðŽg—p‚·‚é */
-#undef SPI_OPTIMIZE_SPISEEK 		/* Å“K‰»‚³‚ê‚½ SpiSeek() ‚ðŽg—p‚·‚é */
+#define SPI_SUPPORT_BUFFERING		/* èª­ã¿è¾¼ã¿ãƒ‡ãƒ¼ã‚¿ã®ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚°ã‚’è¡Œã† */
+#undef SPI_SUPPORT_SPIGETBYTE		/* SpiGetByte() ã‚’åˆ©ç”¨å¯èƒ½ã«ã™ã‚‹ */
+#undef SPI_SUPPORT_SPIREAD			/* SpiRead() ã‚’åˆ©ç”¨å¯èƒ½ã«ã™ã‚‹ */
+#undef SPI_SUPPORT_NULLREAD 		/* SpiRead() ã§ã®ç©ºèª­ã¿å‹•ä½œã‚’æœ‰åŠ¹ã«ã™ã‚‹ */
+#undef SPI_SUPPORT_SPISEEK			/* SpiSeek() ã‚’åˆ©ç”¨å¯èƒ½ã«ã™ã‚‹ */
+#undef SPI_SUPPORT_EOFFLAG			/* EOF ã‚’è¡¨ã™ãƒ•ãƒ©ã‚°ã‚’åˆ©ç”¨å¯èƒ½ã«ã™ã‚‹ */
+#undef SPI_OPTIMIZE_SPIREAD 		/* æœ€é©åŒ–ã•ã‚ŒãŸ SpiRead() ã‚’ä½¿ç”¨ã™ã‚‹ */
+#undef SPI_OPTIMIZE_SPISEEK 		/* æœ€é©åŒ–ã•ã‚ŒãŸ SpiSeek() ã‚’ä½¿ç”¨ã™ã‚‹ */
 
 	/* spialloc.c */
-#undef SPI_ALLOCATE_ROWPOINTERS 	/* sƒ|ƒCƒ“ƒ^”z—ñ‚ðŠ„‚è“–‚Ä‚é */
-#undef SPI_SUPPORT_SPIREALLOC		/* SpiReAllocBuffer() ‚ð—˜—p‰Â”\‚É‚·‚é */
+#undef SPI_ALLOCATE_ROWPOINTERS 	/* è¡Œãƒã‚¤ãƒ³ã‚¿é…åˆ—ã‚’å‰²ã‚Šå½“ã¦ã‚‹ */
+#undef SPI_SUPPORT_SPIREALLOC		/* SpiReAllocBuffer() ã‚’åˆ©ç”¨å¯èƒ½ã«ã™ã‚‹ */
 
-#define SPI_BUFSIZ			(32*1024)	/* “Ç‚Ýž‚Ýƒoƒbƒtƒ@ƒTƒCƒY */
+#define SPI_BUFSIZ			(32*1024)	/* èª­ã¿è¾¼ã¿ãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º */
 
 #if defined(_MSC_VER) && (_MSC_VER < 1400) && defined(NO_CRTENV)
-/* VC2005 ˆÈ~‚Ìê‡Amemmove() ‚ªSIMD–½—ß‚ðŽg‚Á‚Ä‚¢‚ÄASIMD–½—ß‚Ì
- * ƒTƒ|[ƒgƒ`ƒFƒbƒN‚È‚Ç‚ðs‚È‚¤•K—v‚ª‚ ‚é‚½‚ßAƒXƒ^[ƒgƒAƒbƒvƒ‹[ƒ`ƒ“
- * ‚ÌƒŠƒ“ƒN‚ª•K—v‚Æ‚È‚éBƒRƒ“ƒpƒCƒ‰‚É•t‘®‚Ì memmove() ‚É‘ã‚í‚Á‚ÄA
- * SIMD–½—ß‚ðŽg‚í‚È‚¢“ÆŽ©‚Ì memmove() ‚ðƒŠƒ“ƒN‚·‚é‚æ‚¤‚É‚·‚ê‚ÎA
- * VC2005 ˆÈ~‚Ìê‡‚Å‚àƒXƒ^[ƒgƒAƒbƒvƒ‹[ƒ`ƒ“‚ðŠO‚·‚±‚Æ‚Í‚Å‚«‚é‚Í‚¸B
+/* VC2005 ä»¥é™ã®å ´åˆã€memmove() ãŒSIMDå‘½ä»¤ã‚’ä½¿ã£ã¦ã„ã¦ã€SIMDå‘½ä»¤ã®
+ * ã‚µãƒãƒ¼ãƒˆãƒã‚§ãƒƒã‚¯ãªã©ã‚’è¡Œãªã†å¿…è¦ãŒã‚ã‚‹ãŸã‚ã€ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—ãƒ«ãƒ¼ãƒãƒ³
+ * ã®ãƒªãƒ³ã‚¯ãŒå¿…è¦ã¨ãªã‚‹ã€‚ã‚³ãƒ³ãƒ‘ã‚¤ãƒ©ã«ä»˜å±žã® memmove() ã«ä»£ã‚ã£ã¦ã€
+ * SIMDå‘½ä»¤ã‚’ä½¿ã‚ãªã„ç‹¬è‡ªã® memmove() ã‚’ãƒªãƒ³ã‚¯ã™ã‚‹ã‚ˆã†ã«ã™ã‚Œã°ã€
+ * VC2005 ä»¥é™ã®å ´åˆã§ã‚‚ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—ãƒ«ãƒ¼ãƒãƒ³ã‚’å¤–ã™ã“ã¨ã¯ã§ãã‚‹ã¯ãšã€‚
  */
-#define SPI_IMPLEMENT_DLLMAIN		/* DllMain() ‚ð’è‹`‚·‚é */
-#define DllMain	_DllMainCRTStartup	/* ƒXƒ^[ƒgƒAƒbƒvƒ‹[ƒ`ƒ“‚ðƒŠƒ“ƒN‚µ‚È‚¢ */
+#define SPI_IMPLEMENT_DLLMAIN		/* DllMain() ã‚’å®šç¾©ã™ã‚‹ */
+#define DllMain	_DllMainCRTStartup	/* ã‚¹ã‚¿ãƒ¼ãƒˆã‚¢ãƒƒãƒ—ãƒ«ãƒ¼ãƒãƒ³ã‚’ãƒªãƒ³ã‚¯ã—ãªã„ */
 #endif
 
 
@@ -95,52 +95,52 @@
 **		Susie import filter plug-in - API layer (spientry.c)
 */
 
-	/* ƒGƒ‰[ƒR[ƒh */
-#define SPI_ERROR_NOT_IMPLEMENTED	(-1)	/* ‚»‚Ì‹@”\‚Í–¢ŽÀ‘• */
-#define SPI_ERROR_SUCCESS			0	/* ³íI—¹ */
-#define SPI_ERROR_CANCEL_EXPAND		1	/* ƒR[ƒ‹ƒoƒbƒNŠÖ”‚ª”ñ0‚ð•Ô‚µ‚½ */
-#define SPI_ERROR_UNKNOWN_FORMAT	2	/* –¢’m‚ÌƒtƒH[ƒ}ƒbƒg */
-#define SPI_ERROR_BROKEN_DATA		3	/* ƒf[ƒ^‚ª‰ó‚ê‚Ä‚¢‚é */
-#define SPI_ERROR_ALLOCATE_MEMORY	4	/* ƒƒ‚ƒŠ[‚ªŠm•Ûo—ˆ‚È‚¢ */
-#define SPI_ERROR_MEMORY			5	/* ƒƒ‚ƒŠ[ƒGƒ‰[iLocko—ˆ‚È‚¢“™j */
-#define SPI_ERROR_FILE_READ			6	/* ƒtƒ@ƒCƒ‹ƒŠ[ƒhƒGƒ‰[ */
-#define SPI_ERROR_WINDOW			7	/* ‘‹‚ªŠJ‚¯‚È‚¢ (”ñŒöŠJ) */
-#define SPI_ERROR_INTERNAL			8	/* “à•”ƒGƒ‰[ */
-#define SPI_ERROR_FILE_WRITE		9	/* ‘‚«ž‚ÝƒGƒ‰[ (”ñŒöŠJ) */
-#define SPI_ERROR_END_OF_FILE		10	/* ƒtƒ@ƒCƒ‹I’[ (”ñŒöŠJ) */
+	/* ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ */
+#define SPI_ERROR_NOT_IMPLEMENTED	(-1)	/* ãã®æ©Ÿèƒ½ã¯æœªå®Ÿè£… */
+#define SPI_ERROR_SUCCESS			0	/* æ­£å¸¸çµ‚äº† */
+#define SPI_ERROR_CANCEL_EXPAND		1	/* ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ãŒéž0ã‚’è¿”ã—ãŸ */
+#define SPI_ERROR_UNKNOWN_FORMAT	2	/* æœªçŸ¥ã®ãƒ•ã‚©ãƒ¼ãƒžãƒƒãƒˆ */
+#define SPI_ERROR_BROKEN_DATA		3	/* ãƒ‡ãƒ¼ã‚¿ãŒå£Šã‚Œã¦ã„ã‚‹ */
+#define SPI_ERROR_ALLOCATE_MEMORY	4	/* ãƒ¡ãƒ¢ãƒªãƒ¼ãŒç¢ºä¿å‡ºæ¥ãªã„ */
+#define SPI_ERROR_MEMORY			5	/* ãƒ¡ãƒ¢ãƒªãƒ¼ã‚¨ãƒ©ãƒ¼ï¼ˆLockå‡ºæ¥ãªã„ç­‰ï¼‰ */
+#define SPI_ERROR_FILE_READ			6	/* ãƒ•ã‚¡ã‚¤ãƒ«ãƒªãƒ¼ãƒ‰ã‚¨ãƒ©ãƒ¼ */
+#define SPI_ERROR_WINDOW			7	/* çª“ãŒé–‹ã‘ãªã„ (éžå…¬é–‹) */
+#define SPI_ERROR_INTERNAL			8	/* å†…éƒ¨ã‚¨ãƒ©ãƒ¼ */
+#define SPI_ERROR_FILE_WRITE		9	/* æ›¸ãè¾¼ã¿ã‚¨ãƒ©ãƒ¼ (éžå…¬é–‹) */
+#define SPI_ERROR_END_OF_FILE		10	/* ãƒ•ã‚¡ã‚¤ãƒ«çµ‚ç«¯ (éžå…¬é–‹) */
 
-	/* ‰æ‘œî•ñ\‘¢‘Ì */
+	/* ç”»åƒæƒ…å ±æ§‹é€ ä½“ */
 #pragma pack(1)
 typedef struct PictureInfo {
-	long   left, top;			/* ‰æ‘œ‚ð“WŠJ‚·‚éˆÊ’u */
-	long   width;				/* ‰æ‘œ‚Ì•(pixel) */
-	long   height;				/* ‰æ‘œ‚Ì‚‚³(pixel) */
-	WORD   x_density;			/* ‰æ‘f‚Ì…•½•ûŒü–§“x */
-	WORD   y_density;			/* ‰æ‘f‚Ì‚’¼•ûŒü–§“x */
-	short  colorDepth;			/* ‰æ‘f“–‚½‚è‚Ìbit” */
+	long   left, top;			/* ç”»åƒã‚’å±•é–‹ã™ã‚‹ä½ç½® */
+	long   width;				/* ç”»åƒã®å¹…(pixel) */
+	long   height;				/* ç”»åƒã®é«˜ã•(pixel) */
+	WORD   x_density;			/* ç”»ç´ ã®æ°´å¹³æ–¹å‘å¯†åº¦ */
+	WORD   y_density;			/* ç”»ç´ ã®åž‚ç›´æ–¹å‘å¯†åº¦ */
+	short  colorDepth;			/* ç”»ç´ å½“ãŸã‚Šã®bitæ•° */
 #ifdef _WIN64
-	char   dummy[2];			/* ƒAƒ‰ƒCƒ“ƒƒ“ƒg */
+	char   dummy[2];			/* ã‚¢ãƒ©ã‚¤ãƒ³ãƒ¡ãƒ³ãƒˆ */
 #endif
-	HLOCAL hInfo;				/* ‰æ‘œ“à‚ÌƒeƒLƒXƒgî•ñ */
+	HLOCAL hInfo;				/* ç”»åƒå†…ã®ãƒ†ã‚­ã‚¹ãƒˆæƒ…å ± */
 } PictureInfo;
 #pragma pack()
 
-	/* ƒR[ƒ‹ƒoƒbƒNŠÖ”(typedef) */
+	/* ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°(typedef) */
 #ifdef __GNUC__
 typedef int CALLBACK (*SPIPROC) (int, int, LONG_PTR);
 #else
 typedef int (CALLBACK *SPIPROC) (int, int, LONG_PTR);
 #endif
 
-	/* ƒOƒ[ƒoƒ‹•Ï” */
+	/* ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•° */
 #if defined(SPI_IMPLEMENT_DLLMAIN) && defined(SPI_IMPLEMENT_DLLHANDLE)
 extern HINSTANCE ghThisInst;	/* Handle to the DLL's instance. */
 #endif
 
-// ƒR[ƒ‹ƒoƒbƒN
+// ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
 typedef int (__stdcall *SUSIE_PROGRESS)(int nNum, int nDenom, LONG_PTR lData);
 
-	/* ƒvƒƒgƒ^ƒCƒvéŒ¾ */
+	/* ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ */
 #ifdef SPI_IMPLEMENT_DLLMAIN
 # if defined(__RSXNT__)
 #  define DllMain LibMain
@@ -173,21 +173,21 @@ int _export PASCAL GetPreviewW(LPCWSTR, LONG_PTR, unsigned int, HLOCAL *, HLOCAL
 */
 
 #ifndef SPI_BUFSIZ
-# define SPI_BUFSIZ			8192	/* ƒfƒtƒHƒ‹ƒgƒoƒbƒtƒ@ƒTƒCƒY */
+# define SPI_BUFSIZ			8192	/* ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒãƒƒãƒ•ã‚¡ã‚µã‚¤ã‚º */
 #endif
 #ifndef SPI_EOF
 # define SPI_EOF			(-256)	/* End Of File (any negative value) */
 #endif
 
-	/* ƒXƒgƒŠ[ƒ€ó‘Ôƒtƒ‰ƒO */
-#define SPI_IOTYPE_NONE		0x00	/* I/O ƒ^ƒCƒvF“ü—Í–¢‰Šú‰» */
-#define SPI_IOTYPE_FILE		0x01	/* I/O ƒ^ƒCƒvFƒtƒ@ƒCƒ‹“ü—Í */
-#define SPI_IOTYPE_MEMORY	0x02	/* I/O ƒ^ƒCƒvFƒƒ‚ƒŠ“ü—Í */
+	/* ã‚¹ãƒˆãƒªãƒ¼ãƒ çŠ¶æ…‹ãƒ•ãƒ©ã‚° */
+#define SPI_IOTYPE_NONE		0x00	/* I/O ã‚¿ã‚¤ãƒ—ï¼šå…¥åŠ›æœªåˆæœŸåŒ– */
+#define SPI_IOTYPE_FILE		0x01	/* I/O ã‚¿ã‚¤ãƒ—ï¼šãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ› */
+#define SPI_IOTYPE_MEMORY	0x02	/* I/O ã‚¿ã‚¤ãƒ—ï¼šãƒ¡ãƒ¢ãƒªå…¥åŠ› */
 #define SPI_IOTYPE_MASK		0x0F
-#define SPI_IOFLAG_ERROR	0x10	/* ƒGƒ‰[‚ðŒŸo */
-#define SPI_IOFLAG_EOF		0x20	/* EOF‚ðŒŸo */
+#define SPI_IOFLAG_ERROR	0x10	/* ã‚¨ãƒ©ãƒ¼ã‚’æ¤œå‡º */
+#define SPI_IOFLAG_EOF		0x20	/* EOFã‚’æ¤œå‡º */
 
-	/* ó‘Ôƒtƒ‰ƒOŠÖ˜Aƒ}ƒNƒ */
+	/* çŠ¶æ…‹ãƒ•ãƒ©ã‚°é–¢é€£ãƒžã‚¯ãƒ­ */
 #define SpiIoType(f)		((f)->flags & SPI_IOTYPE_MASK)
 #define SpiIsError(f)		((f)->flags & SPI_IOFLAG_ERROR)
 #define SpiSetError(f)		((f)->flags |= SPI_IOFLAG_ERROR)
@@ -202,22 +202,22 @@ int _export PASCAL GetPreviewW(LPCWSTR, LONG_PTR, unsigned int, HLOCAL *, HLOCAL
 # define SpiClearEOF(f)
 #endif
 
-	/* Susie plug-in —p“ü—ÍƒXƒgƒŠ[ƒ€\‘¢‘Ì */
+	/* Susie plug-in ç”¨å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ æ§‹é€ ä½“ */
 typedef struct {
-	UINT   flags;				/* ƒXƒgƒŠ[ƒ€ó‘Ôƒtƒ‰ƒO */
-	HANDLE fhandle;				/* ƒtƒ@ƒCƒ‹“ü—Í‚Ìƒtƒ@ƒCƒ‹ƒnƒ“ƒhƒ‹ */
-	LPCSTR  fname;				/* ƒtƒ@ƒCƒ‹“ü—Í‚Ì“ü—Íƒtƒ@ƒCƒ‹–¼ */
-	LONG_PTR   foffset;			/* ƒtƒ@ƒCƒ‹“ü—Í‚Ì“Ç‚Ýž‚ÝŠJŽnƒIƒtƒZƒbƒg */
+	UINT   flags;				/* ã‚¹ãƒˆãƒªãƒ¼ãƒ çŠ¶æ…‹ãƒ•ãƒ©ã‚° */
+	HANDLE fhandle;				/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ›ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ³ãƒ‰ãƒ« */
+	LPCSTR  fname;				/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ›ã®å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«å */
+	LONG_PTR   foffset;			/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ›ã®èª­ã¿è¾¼ã¿é–‹å§‹ã‚ªãƒ•ã‚»ãƒƒãƒˆ */
 #ifdef SPI_SUPPORT_BUFFERING
-	LONG   ffilptr;				/* ƒtƒ@ƒCƒ‹“ü—Í‚Ìƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^ */
+	LONG   ffilptr;				/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ›ã®ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿ */
 #endif
-	LPBYTE mbuffer;				/* ƒƒ‚ƒŠ“ü—Í‚Ìƒoƒbƒtƒ@ */
-	LPBYTE mptr;				/* ƒƒ‚ƒŠ“ü—Í‚Ìƒ|ƒCƒ“ƒ^ */
-	LONG_PTR   mcount;			/* ƒƒ‚ƒŠ“ü—Í‚ÌŽc‚èƒoƒCƒg” */
-	LONG_PTR   msize;			/* ƒƒ‚ƒŠ“ü—Í‚Ìƒf[ƒ^ƒTƒCƒY */
+	LPBYTE mbuffer;				/* ãƒ¡ãƒ¢ãƒªå…¥åŠ›ã®ãƒãƒƒãƒ•ã‚¡ */
+	LPBYTE mptr;				/* ãƒ¡ãƒ¢ãƒªå…¥åŠ›ã®ãƒã‚¤ãƒ³ã‚¿ */
+	LONG_PTR   mcount;			/* ãƒ¡ãƒ¢ãƒªå…¥åŠ›ã®æ®‹ã‚Šãƒã‚¤ãƒˆæ•° */
+	LONG_PTR   msize;			/* ãƒ¡ãƒ¢ãƒªå…¥åŠ›ã®ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚º */
 } SPI_FILE;
 
-	/* ƒvƒƒgƒ^ƒCƒvéŒ¾ */
+	/* ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ */
 int SpiOpen(SPI_FILE *, LPCSTR, LONG_PTR, unsigned int);
 int SpiOpenW(SPI_FILE *, LPCWSTR, LONG_PTR, unsigned int);
 void SpiClose(SPI_FILE *);
@@ -249,12 +249,12 @@ INT SpiGetByte(SPI_FILE *);
 #define SpiUnlockBuffer(ph)		LocalUnlock(*(ph))
 #define SpiReAllocBufferX(ph,s)	(*(ph) = LocalReAlloc(*(ph),(s),LMEM_MOVEABLE))
 #define SpiFreeBuffer(ph)		(*(ph) = LocalFree(*(ph)))
-            /* ªLocalFree ‚ÍA¬Œ÷‚µ‚½ê‡‚Í NULL ‚ð•Ô‚·BŽ¸”s‚µ‚½ê‡‚Í
-             *   ˆø”‚Ì’l‚ð‚»‚Ì‚Ü‚Ü•Ô‚·Bˆø”‚Ì’l‚ª NULL ‚È‚ç‚Î‰½‚à‚¹‚¸‚É
-             *   NULL ‚ð•Ô‚·B
+            /* â†‘LocalFree ã¯ã€æˆåŠŸã—ãŸå ´åˆã¯ NULL ã‚’è¿”ã™ã€‚å¤±æ•—ã—ãŸå ´åˆã¯
+             *   å¼•æ•°ã®å€¤ã‚’ãã®ã¾ã¾è¿”ã™ã€‚å¼•æ•°ã®å€¤ãŒ NULL ãªã‚‰ã°ä½•ã‚‚ã›ãšã«
+             *   NULL ã‚’è¿”ã™ã€‚
              */
 
-	/* PictureInfo \‘¢‘Ì‚É’l‚ðÝ’è‚·‚é */
+	/* PictureInfo æ§‹é€ ä½“ã«å€¤ã‚’è¨­å®šã™ã‚‹ */
 #define SpiSetPictureInfo(pi,w,h,c,xd,yd,l,t,tx) \
           do { UINT _xd=(xd), _yd=(yd);  if (_xd==0 || _yd==0) _xd=_yd=0; \
                (pi)->left      = (long)(l);  (pi)->top       = (long)(t); \
@@ -263,7 +263,7 @@ INT SpiGetByte(SPI_FILE *);
                (pi)->colorDepth = (short)(c); (pi)->hInfo = (HLOCAL)(tx); \
           } while (0)
 
-	/* ƒvƒƒgƒ^ƒCƒvéŒ¾ */
+	/* ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ */
 int SpiAllocBuffer(HLOCAL *, LPBYTE *, UINT);
 #ifdef SPI_SUPPORT_SPIREALLOC
 int SpiReAllocBuffer(HLOCAL *, LPBYTE *, UINT);
@@ -282,11 +282,11 @@ int SpiInitBitmap(HLOCAL *, LPBITMAPINFO *, HLOCAL *, LPBYTE *, DWORD *,
 **		External definitions
 */
 
-	/* ƒOƒ[ƒoƒ‹•Ï” */
-extern const LPCSTR PluginInfo[];	/* ƒvƒ‰ƒOƒCƒ“î•ñ */
-extern const int    NumInfo;		/* ƒvƒ‰ƒOƒCƒ“î•ñ‚Ìî•ñ” */
+	/* ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•° */
+extern const LPCSTR PluginInfo[];	/* ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æƒ…å ± */
+extern const int    NumInfo;		/* ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æƒ…å ±ã®æƒ…å ±æ•° */
 
-	/* ƒvƒƒgƒ^ƒCƒvéŒ¾ */
+	/* ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ */
 #ifdef SPI_IMPLEMENT_DLLMAIN
 void InitOptions(void);
 #endif

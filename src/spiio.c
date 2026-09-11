@@ -36,11 +36,11 @@
 #ifdef SPI_SUPPORT_BUFFERING
 
 /* ***********************************************************************
-**		ƒoƒbƒtƒ@ƒŠƒ“ƒO•t‚«“ü—ÍƒXƒgƒŠ[ƒ€ŠÖ”
+**		ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚°ä»˜ãå…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ é–¢æ•°
 */
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚ÌƒI[ƒvƒ“
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®ã‚ªãƒ¼ãƒ—ãƒ³
 */
 int SpiOpen(SPI_FILE *fp, LPCSTR buf, LONG_PTR len, unsigned int flag)
 {
@@ -52,7 +52,7 @@ int SpiOpen(SPI_FILE *fp, LPCSTR buf, LONG_PTR len, unsigned int flag)
 	if (buf == NULL || len < 0) return SPI_ERROR_FILE_READ;
 
 	switch (flag & 0x07) {
-	case 0:			/* “ü—Í‚ªƒfƒBƒXƒNƒtƒ@ƒCƒ‹ */
+	case 0:			/* å…¥åŠ›ãŒãƒ‡ã‚£ã‚¹ã‚¯ãƒ•ã‚¡ã‚¤ãƒ« */
 		hFile = CreateFile(buf, GENERIC_READ, FILE_SHARE_READ, NULL,
 		                   OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
@@ -75,7 +75,7 @@ int SpiOpen(SPI_FILE *fp, LPCSTR buf, LONG_PTR len, unsigned int flag)
 		SetFilPtr(fp, 0);		/* fp->ffilptr = 0; */
 		break;
 
-	case 1:			/* “ü—Í‚ªƒƒ‚ƒŠƒoƒbƒtƒ@ */
+	case 1:			/* å…¥åŠ›ãŒãƒ¡ãƒ¢ãƒªãƒãƒƒãƒ•ã‚¡ */
 		fp->flags   = SPI_IOTYPE_MEMORY;
 		fp->mbuffer = (LPBYTE)buf;
 		fp->mptr    = (LPBYTE)buf;
@@ -83,7 +83,7 @@ int SpiOpen(SPI_FILE *fp, LPCSTR buf, LONG_PTR len, unsigned int flag)
 		fp->msize   = len;
 		break;
 
-	default:		/* •s–¾‚È“ü—Íƒ^ƒCƒv */
+	default:		/* ä¸æ˜ãªå…¥åŠ›ã‚¿ã‚¤ãƒ— */
 		return SPI_ERROR_NOT_IMPLEMENTED;
 	}
 
@@ -100,7 +100,7 @@ int SpiOpenW(SPI_FILE *fp, LPCWSTR buf, LONG_PTR len, unsigned int flag)
 	if (buf == NULL || len < 0) return SPI_ERROR_FILE_READ;
 
 	switch (flag & 0x07) {
-	case 0:			/* “ü—Í‚ªƒfƒBƒXƒNƒtƒ@ƒCƒ‹ */
+	case 0:			/* å…¥åŠ›ãŒãƒ‡ã‚£ã‚¹ã‚¯ãƒ•ã‚¡ã‚¤ãƒ« */
 		hFile = CreateFileW(buf, GENERIC_READ, FILE_SHARE_READ, NULL,
 		                   OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
@@ -123,7 +123,7 @@ int SpiOpenW(SPI_FILE *fp, LPCWSTR buf, LONG_PTR len, unsigned int flag)
 		SetFilPtr(fp, 0);		/* fp->ffilptr = 0; */
 		break;
 
-	case 1:			/* “ü—Í‚ªƒƒ‚ƒŠƒoƒbƒtƒ@ */
+	case 1:			/* å…¥åŠ›ãŒãƒ¡ãƒ¢ãƒªãƒãƒƒãƒ•ã‚¡ */
 		fp->flags   = SPI_IOTYPE_MEMORY;
 		fp->mbuffer = (LPBYTE)buf;
 		fp->mptr    = (LPBYTE)buf;
@@ -131,7 +131,7 @@ int SpiOpenW(SPI_FILE *fp, LPCWSTR buf, LONG_PTR len, unsigned int flag)
 		fp->msize   = len;
 		break;
 
-	default:		/* •s–¾‚È“ü—Íƒ^ƒCƒv */
+	default:		/* ä¸æ˜ãªå…¥åŠ›ã‚¿ã‚¤ãƒ— */
 		return SPI_ERROR_NOT_IMPLEMENTED;
 	}
 
@@ -140,7 +140,7 @@ int SpiOpenW(SPI_FILE *fp, LPCWSTR buf, LONG_PTR len, unsigned int flag)
 
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚ÌƒNƒ[ƒY
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®ã‚¯ãƒ­ãƒ¼ã‚º
 */
 void SpiClose(SPI_FILE *fp)
 {
@@ -162,14 +162,14 @@ void SpiClose(SPI_FILE *fp)
 
 
 /*
-**		“ü—Íƒoƒbƒtƒ@‚ÉV‚µ‚¢ƒf[ƒ^‚ğ“Ç‚İ‚Ş
+**		å…¥åŠ›ãƒãƒƒãƒ•ã‚¡ã«æ–°ã—ã„ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿è¾¼ã‚€
 */
 void SpiFillBuf(SPI_FILE *fp)
 {
 	DWORD r;
 
 	switch (SpiIoType(fp)) {
-	case SPI_IOTYPE_FILE:		/* ƒtƒ@ƒCƒ‹“ü—Í */
+	case SPI_IOTYPE_FILE:		/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ› */
 		if (!ReadFile(fp->fhandle,fp->mbuffer,SPI_BUFSIZ,&r,NULL)) {
 			SpiSetError(fp);	/* r = 0; (Set by ReadFile) */
 		} else if (r == 0) {
@@ -181,7 +181,7 @@ void SpiFillBuf(SPI_FILE *fp)
 		AdvFilPtr(fp, r);		/* fp->ffilptr += r; */
 		break;
 
-	case SPI_IOTYPE_MEMORY:		/* ƒƒ‚ƒŠ“ü—Í */
+	case SPI_IOTYPE_MEMORY:		/* ãƒ¡ãƒ¢ãƒªå…¥åŠ› */
 		SpiSetEOF(fp);
 		if (fp->mcount > 0) {	/* Seek to EOF */
 			fp->mptr   = fp->mbuffer + fp->msize;
@@ -189,7 +189,7 @@ void SpiFillBuf(SPI_FILE *fp)
 		}
 		break;
 
-	default:					/* “ü—Í–¢‰Šú‰»‚È‚Ç */
+	default:					/* å…¥åŠ›æœªåˆæœŸåŒ–ãªã© */
 		;
 	}
 }
@@ -197,7 +197,7 @@ void SpiFillBuf(SPI_FILE *fp)
 #ifdef SPI_SUPPORT_SPIGETBYTE
 
 /*
-**		SpiGetByte() ê—p ƒf[ƒ^“Ç‚İ‚İŠÖ”
+**		SpiGetByte() å°‚ç”¨ ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿é–¢æ•°
 */
 INT SpiFillBufX(SPI_FILE *fp)
 {
@@ -212,13 +212,13 @@ INT SpiFillBufX(SPI_FILE *fp)
 #ifdef SPI_SUPPORT_SPIREAD
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚©‚çw’èƒoƒCƒg”‚¾‚¯ƒf[ƒ^‚ğ“Ç‚Ş
-**		SPI_SUPPORT_NULLREAD ‚ª’è‹`‚³‚ê‚Ä‚¢‚éê‡‚É‚ÍA
-**		buf ‚É NULL ‚ğw’è‚Å‚«‚é(w’è‚³‚ê‚½ƒoƒCƒg”‚¾‚¯‹ó“Ç‚İ‚·‚é)
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‹ã‚‰æŒ‡å®šãƒã‚¤ãƒˆæ•°ã ã‘ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã‚€
+**		SPI_SUPPORT_NULLREAD ãŒå®šç¾©ã•ã‚Œã¦ã„ã‚‹å ´åˆã«ã¯ã€
+**		buf ã« NULL ã‚’æŒ‡å®šã§ãã‚‹(æŒ‡å®šã•ã‚ŒãŸãƒã‚¤ãƒˆæ•°ã ã‘ç©ºèª­ã¿ã™ã‚‹)
 **
-**		Note) ’Pƒ‚ÉƒV[ƒN‚·‚é‚ÆAƒfƒBƒXƒNƒLƒƒƒbƒVƒ…‚ª—LŒø‚É
-**		      “­‚©‚È‚¢‚½‚ßA“Á‚Éƒtƒƒbƒs[‚©‚ç“Ç‚ñ‚¾‚Æ‚«‚É
-**		      ’x‚­‚È‚Á‚Ä‚µ‚Ü‚¤ê‡‚ª‚ ‚éB
+**		Note) å˜ç´”ã«ã‚·ãƒ¼ã‚¯ã™ã‚‹ã¨ã€ãƒ‡ã‚£ã‚¹ã‚¯ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãŒæœ‰åŠ¹ã«
+**		      åƒã‹ãªã„ãŸã‚ã€ç‰¹ã«ãƒ•ãƒ­ãƒƒãƒ”ãƒ¼ã‹ã‚‰èª­ã‚“ã ã¨ãã«
+**		      é…ããªã£ã¦ã—ã¾ã†å ´åˆãŒã‚ã‚‹ã€‚
 */
 DWORD SpiRead(LPVOID buf, DWORD rbytes, SPI_FILE *fp)
 {
@@ -270,21 +270,21 @@ DWORD SpiRead(LPVOID buf, DWORD rbytes, SPI_FILE *fp)
 #ifdef SPI_SUPPORT_SPISEEK
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚ğƒV[ƒN‚·‚é
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’ã‚·ãƒ¼ã‚¯ã™ã‚‹
 */
 LONG SpiSeek(SPI_FILE *fp, LONG offset, DWORD method)
 {
 	SpiClearEOF(fp);
 
 	switch (SpiIoType(fp)) {
-	case SPI_IOTYPE_FILE:		/* ƒtƒ@ƒCƒ‹“ü—Í */
+	case SPI_IOTYPE_FILE:		/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ› */
 #ifdef SPI_OPTIMIZE_SPISEEK
 		switch (method) {
 			case FILE_CURRENT: offset -= fp->mcount;  break;
 			case FILE_BEGIN:   offset -= fp->ffilptr;
 			                   method = FILE_CURRENT; break;
 		}
-		/* ˆÚ“®æ‚ªƒoƒbƒtƒ@‚Ì’†‚É‚ ‚é‚È‚çAƒ|ƒCƒ“ƒ^‚ğˆÚ“®‚·‚ê‚Î‚æ‚¢ */
+		/* ç§»å‹•å…ˆãŒãƒãƒƒãƒ•ã‚¡ã®ä¸­ã«ã‚ã‚‹ãªã‚‰ã€ãƒã‚¤ãƒ³ã‚¿ã‚’ç§»å‹•ã™ã‚Œã°ã‚ˆã„ */
 		if (method==FILE_CURRENT && -offset>=0 && -offset<=fp->msize) {
 			fp->mptr   = fp->mbuffer + fp->msize + offset;
 			fp->mcount = -offset;
@@ -307,7 +307,7 @@ LONG SpiSeek(SPI_FILE *fp, LONG offset, DWORD method)
 		}
 		break;
 
-	case SPI_IOTYPE_MEMORY:		/* ƒƒ‚ƒŠ“ü—Í */
+	case SPI_IOTYPE_MEMORY:		/* ãƒ¡ãƒ¢ãƒªå…¥åŠ› */
 		switch (method) {
 			case FILE_CURRENT: offset -= fp->mcount; /*FALLTHROUGH*/
 			case FILE_END:     offset += fp->msize;  /*FALLTHROUGH*/
@@ -319,7 +319,7 @@ LONG SpiSeek(SPI_FILE *fp, LONG offset, DWORD method)
 		fp->mcount = fp->msize   - offset;
 		break;
 
-	default:				/* “ü—Í–¢‰Šú‰»‚È‚Ç */
+	default:				/* å…¥åŠ›æœªåˆæœŸåŒ–ãªã© */
 		return -1;
 	}
 
@@ -332,11 +332,11 @@ LONG SpiSeek(SPI_FILE *fp, LONG offset, DWORD method)
 #else	/* SPI_SUPPORT_BUFFERING */
 
 /* ***********************************************************************
-**		ƒoƒbƒtƒ@ƒŠƒ“ƒO‚È‚µ“ü—ÍƒXƒgƒŠ[ƒ€ŠÖ”
+**		ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚°ãªã—å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ é–¢æ•°
 */
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚ÌƒI[ƒvƒ“
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®ã‚ªãƒ¼ãƒ—ãƒ³
 */
 int SpiOpen(SPI_FILE *fp, LPSTR buf, long len, unsigned int flag)
 {
@@ -347,7 +347,7 @@ int SpiOpen(SPI_FILE *fp, LPSTR buf, long len, unsigned int flag)
 	if (buf == NULL || len < 0) return SPI_ERROR_FILE_READ;
 
 	switch (flag & 0x07) {
-	case 0:			/* “ü—Í‚ªƒfƒBƒXƒNƒtƒ@ƒCƒ‹ */
+	case 0:			/* å…¥åŠ›ãŒãƒ‡ã‚£ã‚¹ã‚¯ãƒ•ã‚¡ã‚¤ãƒ« */
 		hFile = CreateFile(buf, GENERIC_READ, FILE_SHARE_READ, NULL,
 		                   OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
@@ -360,7 +360,7 @@ int SpiOpen(SPI_FILE *fp, LPSTR buf, long len, unsigned int flag)
 		fp->foffset = len;
 		break;
 
-	case 1:			/* “ü—Í‚ªƒƒ‚ƒŠƒoƒbƒtƒ@ */
+	case 1:			/* å…¥åŠ›ãŒãƒ¡ãƒ¢ãƒªãƒãƒƒãƒ•ã‚¡ */
 		fp->flags   = SPI_IOTYPE_MEMORY;
 		fp->mbuffer = (LPBYTE)buf;
 		fp->mptr    = (LPBYTE)buf;
@@ -368,7 +368,7 @@ int SpiOpen(SPI_FILE *fp, LPSTR buf, long len, unsigned int flag)
 		fp->msize   = len;
 		break;
 
-	default:		/* •s–¾‚È“ü—Íƒ^ƒCƒv */
+	default:		/* ä¸æ˜ãªå…¥åŠ›ã‚¿ã‚¤ãƒ— */
 		return SPI_ERROR_NOT_IMPLEMENTED;
 	}
 
@@ -377,7 +377,7 @@ int SpiOpen(SPI_FILE *fp, LPSTR buf, long len, unsigned int flag)
 
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚ÌƒNƒ[ƒY
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã®ã‚¯ãƒ­ãƒ¼ã‚º
 */
 void SpiClose(SPI_FILE *fp)
 {
@@ -399,10 +399,10 @@ void SpiClose(SPI_FILE *fp)
 #ifdef SPI_SUPPORT_SPIGETBYTE
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚©‚ç‚PƒoƒCƒg‚ğ“Ç‚Ş
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‹ã‚‰ï¼‘ãƒã‚¤ãƒˆã‚’èª­ã‚€
 **
-**		Note) ‚±‚ÌŠÖ”‚ÍAƒoƒbƒtƒ@ƒŠƒ“ƒO‚ ‚è“ü—ÍŠÖ”ŒQ‚Æ‚Ì
-**		      ŒİŠ·«‚ğˆÛ‚·‚é‚½‚ß‚¾‚¯‚Ì‚à‚Ì‚Å‚·B
+**		Note) ã“ã®é–¢æ•°ã¯ã€ãƒãƒƒãƒ•ã‚¡ãƒªãƒ³ã‚°ã‚ã‚Šå…¥åŠ›é–¢æ•°ç¾¤ã¨ã®
+**		      äº’æ›æ€§ã‚’ç¶­æŒã™ã‚‹ãŸã‚ã ã‘ã®ã‚‚ã®ã§ã™ã€‚
 */
 INT SpiGetByte(SPI_FILE *fp)
 {
@@ -410,7 +410,7 @@ INT SpiGetByte(SPI_FILE *fp)
 	BYTE c;
 
 	switch (SpiIoType(fp)) {
-	case SPI_IOTYPE_FILE:		/* ƒtƒ@ƒCƒ‹“ü—Í */
+	case SPI_IOTYPE_FILE:		/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ› */
 		if (!ReadFile(fp->fhandle,&c,1,&n,NULL)) {
 			SpiSetError(fp);
 			return SPI_EOF;
@@ -421,7 +421,7 @@ INT SpiGetByte(SPI_FILE *fp)
 		}
 		break;
 
-	case SPI_IOTYPE_MEMORY:		/* ƒƒ‚ƒŠ“ü—Í */
+	case SPI_IOTYPE_MEMORY:		/* ãƒ¡ãƒ¢ãƒªå…¥åŠ› */
 		if (fp->mcount <= 0) {
 			SpiSetEOF(fp);
 			return SPI_EOF;
@@ -430,7 +430,7 @@ INT SpiGetByte(SPI_FILE *fp)
 		fp->mcount--;
 		break;
 
-	default:				/* “ü—Í–¢‰Šú‰»‚È‚Ç */
+	default:				/* å…¥åŠ›æœªåˆæœŸåŒ–ãªã© */
 		return SPI_EOF;
 	}
 
@@ -442,13 +442,13 @@ INT SpiGetByte(SPI_FILE *fp)
 #ifdef SPI_SUPPORT_SPIREAD
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚©‚çw’èƒoƒCƒg”‚¾‚¯ƒf[ƒ^‚ğ“Ç‚Ş
-**		SPI_SUPPORT_NULLREAD ‚ª’è‹`‚³‚ê‚Ä‚¢‚éê‡‚É‚ÍA
-**		buf ‚É NULL ‚ğw’è‚Å‚«‚é(w’è‚³‚ê‚½ƒoƒCƒg”‚¾‚¯‹ó“Ç‚İ‚·‚é)
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‹ã‚‰æŒ‡å®šãƒã‚¤ãƒˆæ•°ã ã‘ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã‚€
+**		SPI_SUPPORT_NULLREAD ãŒå®šç¾©ã•ã‚Œã¦ã„ã‚‹å ´åˆã«ã¯ã€
+**		buf ã« NULL ã‚’æŒ‡å®šã§ãã‚‹(æŒ‡å®šã•ã‚ŒãŸãƒã‚¤ãƒˆæ•°ã ã‘ç©ºèª­ã¿ã™ã‚‹)
 **
-**		Note) ’Pƒ‚ÉƒV[ƒN‚·‚é‚ÆAƒfƒBƒXƒNƒLƒƒƒbƒVƒ…‚ª—LŒø‚É
-**		      “­‚©‚È‚¢‚½‚ßA“Á‚Éƒtƒƒbƒs[‚©‚ç“Ç‚ñ‚¾‚Æ‚«‚É
-**		      ’x‚­‚È‚Á‚Ä‚µ‚Ü‚¤ê‡‚ª‚ ‚éB
+**		Note) å˜ç´”ã«ã‚·ãƒ¼ã‚¯ã™ã‚‹ã¨ã€ãƒ‡ã‚£ã‚¹ã‚¯ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãŒæœ‰åŠ¹ã«
+**		      åƒã‹ãªã„ãŸã‚ã€ç‰¹ã«ãƒ•ãƒ­ãƒƒãƒ”ãƒ¼ã‹ã‚‰èª­ã‚“ã ã¨ãã«
+**		      é…ããªã£ã¦ã—ã¾ã†å ´åˆãŒã‚ã‚‹ã€‚
 */
 DWORD SpiRead(LPVOID buf, DWORD rbytes, SPI_FILE *fp)
 {
@@ -459,7 +459,7 @@ DWORD SpiRead(LPVOID buf, DWORD rbytes, SPI_FILE *fp)
 	DWORD n;
 
 	switch (SpiIoType(fp)) {
-	case SPI_IOTYPE_FILE:		/* ƒtƒ@ƒCƒ‹“ü—Í */
+	case SPI_IOTYPE_FILE:		/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ› */
 #ifdef SPI_SUPPORT_NULLREAD
 		if (buf == NULL) {
 			buf = nulbuf;
@@ -489,7 +489,7 @@ DWORD SpiRead(LPVOID buf, DWORD rbytes, SPI_FILE *fp)
 #endif	/* ----- */
 		break;
 
-	case SPI_IOTYPE_MEMORY:		/* ƒƒ‚ƒŠ“ü—Í */
+	case SPI_IOTYPE_MEMORY:		/* ãƒ¡ãƒ¢ãƒªå…¥åŠ› */
 		if (fp->mcount <= 0) { SpiSetEOF(fp); return 0; }
 		if ((DWORD)fp->mcount < rbytes) {
 			rbytes = (DWORD)fp->mcount;
@@ -501,7 +501,7 @@ DWORD SpiRead(LPVOID buf, DWORD rbytes, SPI_FILE *fp)
 		fp->mcount -= rbytes;
 		break;
 
-	default:				/* “ü—Í–¢‰Šú‰»‚È‚Ç */
+	default:				/* å…¥åŠ›æœªåˆæœŸåŒ–ãªã© */
 		return 0;
 	}
 
@@ -513,20 +513,20 @@ DWORD SpiRead(LPVOID buf, DWORD rbytes, SPI_FILE *fp)
 #ifdef SPI_SUPPORT_SPISEEK
 
 /*
-**		“ü—ÍƒXƒgƒŠ[ƒ€‚ğƒV[ƒN‚·‚é
+**		å…¥åŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’ã‚·ãƒ¼ã‚¯ã™ã‚‹
 */
 LONG SpiSeek(SPI_FILE *fp, LONG offset, DWORD method)
 {
 	SpiClearEOF(fp);
 
 	switch (SpiIoType(fp)) {
-	case SPI_IOTYPE_FILE:		/* ƒtƒ@ƒCƒ‹“ü—Í */
+	case SPI_IOTYPE_FILE:		/* ãƒ•ã‚¡ã‚¤ãƒ«å…¥åŠ› */
 		if (method == FILE_BEGIN) offset += fp->foffset;
 		offset = (LONG)SetFilePointer(fp->fhandle, offset, NULL, method);
 		if (offset != -1) offset -= fp->foffset;
 		break;
 
-	case SPI_IOTYPE_MEMORY:		/* ƒƒ‚ƒŠ“ü—Í */
+	case SPI_IOTYPE_MEMORY:		/* ãƒ¡ãƒ¢ãƒªå…¥åŠ› */
 		switch (method) {
 			case FILE_CURRENT: offset -= fp->mcount; /*FALLTHROUGH*/
 			case FILE_END:     offset += fp->msize;  /*FALLTHROUGH*/
@@ -538,7 +538,7 @@ LONG SpiSeek(SPI_FILE *fp, LONG offset, DWORD method)
 		fp->mcount = fp->msize   - offset;
 		break;
 
-	default:				/* “ü—Í–¢‰Šú‰»‚È‚Ç */
+	default:				/* å…¥åŠ›æœªåˆæœŸåŒ–ãªã© */
 		return -1;
 	}
 

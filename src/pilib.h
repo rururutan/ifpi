@@ -1,5 +1,5 @@
 /*
-**  pilib.h - .pi “Ç‚İ‚İ/‘‚«o‚µƒ‰ƒCƒuƒ‰ƒŠ ver.3.10 (Sep 6, 2004
+**  pilib.h - .pi èª­ã¿è¾¼ã¿/æ›¸ãå‡ºã—ãƒ©ã‚¤ãƒ–ãƒ©ãƒª ver.3.10 (Sep 6, 2004
 **
 **  Copyright (C) 1999-2004 MIYASAKA Masaru <alkaid@coral.ocn.ne.jp>
 **
@@ -23,23 +23,23 @@
 **
 **  ----
 **
-**  –{ƒ\ƒtƒgƒEƒFƒA‚ÍuŒ»ó‚Ì‚Ü‚Üv‚ÅA–¾¦‚Å‚ ‚é‚©ˆÃ–Ù‚Å‚ ‚é‚©‚ğ–â‚í‚¸A‰½‚ç‚Ì
-**  •ÛØ‚à‚È‚­’ñ‹Ÿ‚³‚ê‚Ü‚·B –{ƒ\ƒtƒgƒEƒFƒA‚Ìg—p‚É‚æ‚Á‚Ä¶‚¶‚é‚¢‚©‚È‚é‘¹ŠQ‚É
-**  ‚Â‚¢‚Ä‚àAìÒ‚ÍˆêØ‚ÌÓ”C‚ğ•‰‚í‚È‚¢‚à‚Ì‚Æ‚µ‚Ü‚·B
+**  æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã¯ã€Œç¾çŠ¶ã®ã¾ã¾ã€ã§ã€æ˜ç¤ºã§ã‚ã‚‹ã‹æš—é»™ã§ã‚ã‚‹ã‹ã‚’å•ã‚ãšã€ä½•ã‚‰ã®
+**  ä¿è¨¼ã‚‚ãªãæä¾›ã•ã‚Œã¾ã™ã€‚ æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®ä½¿ç”¨ã«ã‚ˆã£ã¦ç”Ÿã˜ã‚‹ã„ã‹ãªã‚‹æå®³ã«
+**  ã¤ã„ã¦ã‚‚ã€ä½œè€…ã¯ä¸€åˆ‡ã®è²¬ä»»ã‚’è² ã‚ãªã„ã‚‚ã®ã¨ã—ã¾ã™ã€‚
 **
-**  ˆÈ‰º‚Ì§ŒÀ‚É]‚¤ŒÀ‚èA¤—pƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğŠÜ‚ß‚ÄA–{ƒ\ƒtƒgƒEƒFƒA‚ğ”CˆÓ‚Ì
-**  –Ú“I‚Ég—p‚µA©—R‚É‰ü•Ï‚µ‚ÄÄ”Ğ•z‚·‚é‚±‚Æ‚ğ‚·‚×‚Ä‚Ìl‚É‹–‰Â‚µ‚Ü‚·B
+**  ä»¥ä¸‹ã®åˆ¶é™ã«å¾“ã†é™ã‚Šã€å•†ç”¨ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’å«ã‚ã¦ã€æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚’ä»»æ„ã®
+**  ç›®çš„ã«ä½¿ç”¨ã—ã€è‡ªç”±ã«æ”¹å¤‰ã—ã¦å†é ’å¸ƒã™ã‚‹ã“ã¨ã‚’ã™ã¹ã¦ã®äººã«è¨±å¯ã—ã¾ã™ã€‚
 **
-**  1. –{ƒ\ƒtƒgƒEƒFƒA‚Ìo©‚É‚Â‚¢‚Ä‹•‹U‚Ì•\¦‚ğ‚µ‚Ä‚Í‚È‚è‚Ü‚¹‚ñB
-**     ‚ ‚È‚½‚ªƒIƒŠƒWƒiƒ‹‚Ìƒ\ƒtƒgƒEƒFƒA‚ğì¬‚µ‚½‚Æå’£‚µ‚Ä‚Í‚È‚è‚Ü‚¹‚ñB
-**     ‚ ‚È‚½‚ª–{ƒ\ƒtƒgƒEƒFƒA‚ğ»•i“à‚Åg—p‚·‚éê‡A»•i‚Ì•¶‘‚ÉÓ«‚ğ“ü‚ê‚Ä
-**     ‚¢‚½‚¾‚¯‚ê‚ÎK‚¢‚Å‚·‚ªA•K{‚Å‚Í‚ ‚è‚Ü‚¹‚ñB
+**  1. æœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã®å‡ºè‡ªã«ã¤ã„ã¦è™šå½ã®è¡¨ç¤ºã‚’ã—ã¦ã¯ãªã‚Šã¾ã›ã‚“ã€‚
+**     ã‚ãªãŸãŒã‚ªãƒªã‚¸ãƒŠãƒ«ã®ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚’ä½œæˆã—ãŸã¨ä¸»å¼µã—ã¦ã¯ãªã‚Šã¾ã›ã‚“ã€‚
+**     ã‚ãªãŸãŒæœ¬ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã‚’è£½å“å†…ã§ä½¿ç”¨ã™ã‚‹å ´åˆã€è£½å“ã®æ–‡æ›¸ã«è¬è¾ã‚’å…¥ã‚Œã¦
+**     ã„ãŸã ã‘ã‚Œã°å¹¸ã„ã§ã™ãŒã€å¿…é ˆã§ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚
 **
-**  2. ƒ\[ƒX‚ğ•ÏX‚µ‚½ê‡‚ÍA‚»‚Ì‚±‚Æ‚ğ–¾¦‚µ‚È‚¯‚ê‚Î‚È‚è‚Ü‚¹‚ñBƒIƒŠƒWƒiƒ‹
-**     ‚Ìƒ\ƒtƒgƒEƒFƒA‚Å‚ ‚é‚Æ‚¢‚¤‹•‹U‚Ì•\¦‚ğ‚µ‚Ä‚Í‚È‚è‚Ü‚¹‚ñB
+**  2. ã‚½ãƒ¼ã‚¹ã‚’å¤‰æ›´ã—ãŸå ´åˆã¯ã€ãã®ã“ã¨ã‚’æ˜ç¤ºã—ãªã‘ã‚Œã°ãªã‚Šã¾ã›ã‚“ã€‚ã‚ªãƒªã‚¸ãƒŠãƒ«
+**     ã®ã‚½ãƒ•ãƒˆã‚¦ã‚§ã‚¢ã§ã‚ã‚‹ã¨ã„ã†è™šå½ã®è¡¨ç¤ºã‚’ã—ã¦ã¯ãªã‚Šã¾ã›ã‚“ã€‚
 **
-**  3. ƒ\[ƒX‚Ì”Ğ•z•¨‚©‚çA‚±‚Ì•\¦‚ğíœ‚µ‚½‚èA•\¦‚Ì“à—e‚ğ•ÏX‚µ‚½‚è‚µ‚Ä‚Í
-**     ‚È‚è‚Ü‚¹‚ñ
+**  3. ã‚½ãƒ¼ã‚¹ã®é ’å¸ƒç‰©ã‹ã‚‰ã€ã“ã®è¡¨ç¤ºã‚’å‰Šé™¤ã—ãŸã‚Šã€è¡¨ç¤ºã®å†…å®¹ã‚’å¤‰æ›´ã—ãŸã‚Šã—ã¦ã¯
+**     ãªã‚Šã¾ã›ã‚“
 **
 **  ----
 **
@@ -86,23 +86,23 @@
 **		Configurations
 */
 
-	/* SusieƒGƒ‰[ƒR[ƒh (from spibase.h)*/
+	/* Susieã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ (from spibase.h)*/
 #ifndef SPI_ERROR_SUCCESS
-#define SPI_ERROR_NOT_IMPLEMENTED	(-1)	/* ‚»‚Ì‹@”\‚Í–¢À‘• */
-#define SPI_ERROR_SUCCESS			0	/* ³íI—¹ */
-#define SPI_ERROR_CANCEL_EXPAND		1	/* ƒR[ƒ‹ƒoƒbƒNŠÖ”‚ª”ñ0‚ğ•Ô‚µ‚½ */
-#define SPI_ERROR_UNKNOWN_FORMAT	2	/* –¢’m‚ÌƒtƒH[ƒ}ƒbƒg */
-#define SPI_ERROR_BROKEN_DATA		3	/* ƒf[ƒ^‚ª‰ó‚ê‚Ä‚¢‚é */
-#define SPI_ERROR_ALLOCATE_MEMORY	4	/* ƒƒ‚ƒŠ[‚ªŠm•Ûo—ˆ‚È‚¢ */
-#define SPI_ERROR_MEMORY			5	/* ƒƒ‚ƒŠ[ƒGƒ‰[iLocko—ˆ‚È‚¢“™j*/
-#define SPI_ERROR_FILE_READ			6	/* ƒtƒ@ƒCƒ‹ƒŠ[ƒhƒGƒ‰[ */
-#define SPI_ERROR_WINDOW			7	/* ‘‹‚ªŠJ‚¯‚È‚¢ (”ñŒöŠJ) */
-#define SPI_ERROR_INTERNAL			8	/* “à•”ƒGƒ‰[ */
-#define SPI_ERROR_FILE_WRITE		9	/* ‘‚«‚İƒGƒ‰[ (”ñŒöŠJ) */
-#define SPI_ERROR_END_OF_FILE		10	/* ƒtƒ@ƒCƒ‹I’[ (”ñŒöŠJ) */
+#define SPI_ERROR_NOT_IMPLEMENTED	(-1)	/* ãã®æ©Ÿèƒ½ã¯æœªå®Ÿè£… */
+#define SPI_ERROR_SUCCESS			0	/* æ­£å¸¸çµ‚äº† */
+#define SPI_ERROR_CANCEL_EXPAND		1	/* ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ãŒé0ã‚’è¿”ã—ãŸ */
+#define SPI_ERROR_UNKNOWN_FORMAT	2	/* æœªçŸ¥ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ */
+#define SPI_ERROR_BROKEN_DATA		3	/* ãƒ‡ãƒ¼ã‚¿ãŒå£Šã‚Œã¦ã„ã‚‹ */
+#define SPI_ERROR_ALLOCATE_MEMORY	4	/* ãƒ¡ãƒ¢ãƒªãƒ¼ãŒç¢ºä¿å‡ºæ¥ãªã„ */
+#define SPI_ERROR_MEMORY			5	/* ãƒ¡ãƒ¢ãƒªãƒ¼ã‚¨ãƒ©ãƒ¼ï¼ˆLockå‡ºæ¥ãªã„ç­‰ï¼‰*/
+#define SPI_ERROR_FILE_READ			6	/* ãƒ•ã‚¡ã‚¤ãƒ«ãƒªãƒ¼ãƒ‰ã‚¨ãƒ©ãƒ¼ */
+#define SPI_ERROR_WINDOW			7	/* çª“ãŒé–‹ã‘ãªã„ (éå…¬é–‹) */
+#define SPI_ERROR_INTERNAL			8	/* å†…éƒ¨ã‚¨ãƒ©ãƒ¼ */
+#define SPI_ERROR_FILE_WRITE		9	/* æ›¸ãè¾¼ã¿ã‚¨ãƒ©ãƒ¼ (éå…¬é–‹) */
+#define SPI_ERROR_END_OF_FILE		10	/* ãƒ•ã‚¡ã‚¤ãƒ«çµ‚ç«¯ (éå…¬é–‹) */
 #endif
 
-	/* ƒGƒ‰[ƒR[ƒh‚ÌƒI[ƒo[ƒ‰ƒCƒh’è‹` */
+	/* ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰å®šç¾© */
 #define PI_OK						SPI_ERROR_SUCCESS
 #define PI_ERR_NOT_A_PI				SPI_ERROR_UNKNOWN_FORMAT
 #define PI_ERR_INVALID_BITDEPTH		SPI_ERROR_BROKEN_DATA
@@ -114,8 +114,8 @@
 #define PI_ERR_OUT_OF_MEMORY		SPI_ERROR_ALLOCATE_MEMORY
 #define PI_ERR_CALLBACK_CANCELED	SPI_ERROR_CANCEL_EXPAND
 
-	/* ƒpƒŒƒbƒg\‘¢‘Ì‚ÌƒI[ƒo[ƒ‰ƒCƒh’è‹`
-		(= BMP ƒtƒ@ƒCƒ‹‚Ì RGBQUAD \‘¢‘Ì) */
+	/* ãƒ‘ãƒ¬ãƒƒãƒˆæ§‹é€ ä½“ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰å®šç¾©
+		(= BMP ãƒ•ã‚¡ã‚¤ãƒ«ã® RGBQUAD æ§‹é€ ä½“) */
 typedef RGBQUAD pi_color;
 #define PI_COLOR_DEFINED
 #define pi_set_color(p,r,g,b) \
@@ -123,32 +123,32 @@ typedef RGBQUAD pi_color;
 #define pi_get_color(p,r,g,b) \
             (*(r) = (p)->rgbRed, *(g) = (p)->rgbGreen, *(b) = (p)->rgbBlue)
 
-	/* Šeí“®ìİ’è */
-#undef PI_SUPPORT_LONGJMP				/* longjmp() ‚ğg‚Á‚ÄƒGƒ‰[ˆ—‚ğ‚·‚é */
-#undef PI_SUPPORT_PROGRESS_CALLBACK 	/* ƒR[ƒ‹ƒoƒbƒNŠÖ”‚ğg—p‰Â”\‚É‚·‚é */
+	/* å„ç¨®å‹•ä½œè¨­å®š */
+#undef PI_SUPPORT_LONGJMP				/* longjmp() ã‚’ä½¿ã£ã¦ã‚¨ãƒ©ãƒ¼å‡¦ç†ã‚’ã™ã‚‹ */
+#undef PI_SUPPORT_PROGRESS_CALLBACK 	/* ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã‚’ä½¿ç”¨å¯èƒ½ã«ã™ã‚‹ */
 
-#undef PI_READ_SKIP_MACBINARY			/* æ“ª‚Ì MacBinary ‚ğ“Ç‚İ”ò‚Î‚· */
-#undef PI_READ_SUPPORT_STDIO			/* ‚b•W€ƒXƒgƒŠ[ƒ€“ü—Í‚ÌƒTƒ|[ƒg */
-#define PI_READ_SUPPORT_EXTINFO			/* ƒwƒbƒ_‚ÌŠg’£î•ñ‚ğæ“¾‚·‚é */
-#define PI_READ_SUPPORT_COMMENT			/* “à‘ ƒeƒLƒXƒg‚ğæ“¾‚·‚é */
-#undef PI_READ_SUPPORT_READIMAGE		/* pi_read_image() ‚ğg—p‰Â”\‚É‚·‚é */
-#undef PI_READ_OUTPUT_8BPP_FMT			/* í‚É 8bit/pixel Œ`®‚Åo—Í‚·‚é */
+#undef PI_READ_SKIP_MACBINARY			/* å…ˆé ­ã® MacBinary ã‚’èª­ã¿é£›ã°ã™ */
+#undef PI_READ_SUPPORT_STDIO			/* ï¼£æ¨™æº–ã‚¹ãƒˆãƒªãƒ¼ãƒ å…¥åŠ›ã®ã‚µãƒãƒ¼ãƒˆ */
+#define PI_READ_SUPPORT_EXTINFO			/* ãƒ˜ãƒƒãƒ€ã®æ‹¡å¼µæƒ…å ±ã‚’å–å¾—ã™ã‚‹ */
+#define PI_READ_SUPPORT_COMMENT			/* å†…è”µãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—ã™ã‚‹ */
+#undef PI_READ_SUPPORT_READIMAGE		/* pi_read_image() ã‚’ä½¿ç”¨å¯èƒ½ã«ã™ã‚‹ */
+#undef PI_READ_OUTPUT_8BPP_FMT			/* å¸¸ã« 8bit/pixel å½¢å¼ã§å‡ºåŠ›ã™ã‚‹ */
 
-#undef PI_WRITE_SUPPORT_STDIO			/* ‚b•W€ƒXƒgƒŠ[ƒ€o—Í‚ÌƒTƒ|[ƒg */
-#define PI_WRITE_SUPPORT_EXTINFO 		/* ƒwƒbƒ_‚ÌŠg’£î•ñ‚ğİ’è‚·‚é */
-#define PI_WRITE_SUPPORT_COMMENT 		/* “à‘ ƒeƒLƒXƒg‚ğİ’è‚·‚é */
-#undef PI_WRITE_SUPPORT_WRITEIMAGE		/* pi_write_image() ‚ğg—p‰Â”\‚É‚·‚é */
-#undef PI_WRITE_INPUT_8BPP_FMT			/* í‚É 8bit/pixel Œ`®‚Å“ü—Í‚·‚é */
+#undef PI_WRITE_SUPPORT_STDIO			/* ï¼£æ¨™æº–ã‚¹ãƒˆãƒªãƒ¼ãƒ å‡ºåŠ›ã®ã‚µãƒãƒ¼ãƒˆ */
+#define PI_WRITE_SUPPORT_EXTINFO 		/* ãƒ˜ãƒƒãƒ€ã®æ‹¡å¼µæƒ…å ±ã‚’è¨­å®šã™ã‚‹ */
+#define PI_WRITE_SUPPORT_COMMENT 		/* å†…è”µãƒ†ã‚­ã‚¹ãƒˆã‚’è¨­å®šã™ã‚‹ */
+#undef PI_WRITE_SUPPORT_WRITEIMAGE		/* pi_write_image() ã‚’ä½¿ç”¨å¯èƒ½ã«ã™ã‚‹ */
+#undef PI_WRITE_INPUT_8BPP_FMT			/* å¸¸ã« 8bit/pixel å½¢å¼ã§å…¥åŠ›ã™ã‚‹ */
 
-#define PI_CALL_USING_FASTCALL			/* “à•”ŠÖ”‚É fastcall ŒÄ‚Ño‚µ‚ğg‚¤ */
-#define PI_INIT_STRUCT_BY_MEMSET 		/* pi_memset() ‚Å\‘¢‘Ì‚ğ‰Šú‰»‚·‚é */
-#define PI_WORD_OPERATION_ON_PIXEL		/* 16ƒrƒbƒg’PˆÊ‚ÅƒsƒNƒZƒ‹‚ğˆµ‚¤ */
-#define PI_WRITE_PUTBITS_FUNC			/* ŠÖ””Å‚Ìƒrƒbƒgo—Íƒ‹[ƒ`ƒ“‚ğg‚¤ */
+#define PI_CALL_USING_FASTCALL			/* å†…éƒ¨é–¢æ•°ã« fastcall å‘¼ã³å‡ºã—ã‚’ä½¿ã† */
+#define PI_INIT_STRUCT_BY_MEMSET 		/* pi_memset() ã§æ§‹é€ ä½“ã‚’åˆæœŸåŒ–ã™ã‚‹ */
+#define PI_WORD_OPERATION_ON_PIXEL		/* 16ãƒ“ãƒƒãƒˆå˜ä½ã§ãƒ”ã‚¯ã‚»ãƒ«ã‚’æ‰±ã† */
+#define PI_WRITE_PUTBITS_FUNC			/* é–¢æ•°ç‰ˆã®ãƒ“ãƒƒãƒˆå‡ºåŠ›ãƒ«ãƒ¼ãƒãƒ³ã‚’ä½¿ã† */
 
-	/* •‚ª2pixelˆÈ‰º‚Ì‰æ‘œ‚ğAPid—l‘(PITECH.TXT)‚É‘‚©‚ê‚Ä‚¢‚é‚Æ‚¨‚è‚É
-	 * ƒGƒ“ƒR[ƒh^ƒfƒR[ƒh‚·‚é‚É‚ÍAˆÈ‰º‚Ìƒ}ƒNƒ‚ğ #define ‚µ‚Ü‚·B
-	 * Ú‚µ‚­‚Í piwrite.c ‚Ì’†‚Ìu•‚ª2pixelˆÈ‰º‚Ì‰æ‘œ‚Ìˆ—–@v‚ğŒ©‚Ä
-	 * ‚­‚¾‚³‚¢B“Á‚É——R‚Ì‚È‚¢ŒÀ‚è #undef ‚É‚µ‚Ä‚¨‚­‚±‚Æ‚ğ‚¨‘E‚ß‚µ‚Ü‚·B*/
+	/* å¹…ãŒ2pixelä»¥ä¸‹ã®ç”»åƒã‚’ã€Piä»•æ§˜æ›¸(PITECH.TXT)ã«æ›¸ã‹ã‚Œã¦ã„ã‚‹ã¨ãŠã‚Šã«
+	 * ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ï¼ãƒ‡ã‚³ãƒ¼ãƒ‰ã™ã‚‹ã«ã¯ã€ä»¥ä¸‹ã®ãƒã‚¯ãƒ­ã‚’ #define ã—ã¾ã™ã€‚
+	 * è©³ã—ãã¯ piwrite.c ã®ä¸­ã®ã€Œå¹…ãŒ2pixelä»¥ä¸‹ã®ç”»åƒã®å‡¦ç†æ³•ã€ã‚’è¦‹ã¦
+	 * ãã ã•ã„ã€‚ç‰¹ã«ç†ç”±ã®ãªã„é™ã‚Š #undef ã«ã—ã¦ãŠãã“ã¨ã‚’ãŠè–¦ã‚ã—ã¾ã™ã€‚*/
 #undef PI_READ_W2_SPEC_COMPLIANT_DECODING
 #undef PI_WRITE_W2_SPEC_COMPLIANT_ENCODING
 
@@ -158,29 +158,29 @@ typedef RGBQUAD pi_color;
 **		Pi format encoding/decoding library (piwrite.c/piread.c)
 */
 
-	/* ƒfƒtƒHƒ‹ƒg‚ÌƒGƒ‰[ƒR[ƒh(Ä’è‹`‰Â”\) */
+	/* ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰(å†å®šç¾©å¯èƒ½) */
 #ifndef PI_OK
-#define PI_OK						0		/* ³í */
-#define PI_ERR_NOT_A_PI				1		/* .PIƒtƒ@ƒCƒ‹‚Å‚Í‚È‚¢ */
-#define PI_ERR_INVALID_BITDEPTH		2		/* –³Œø‚ÈF[“x(4,8 ˆÈŠO) */
-#define PI_ERR_INVALID_WIDTH		3		/* –³Œø‚È•(0 or 65535’´) */
-#define PI_ERR_INVALID_HEIGHT		4		/* –³Œø‚È‚‚³(0 or 65535’´) */
-#define PI_ERR_FILE_WRITE			5		/* ƒtƒ@ƒCƒ‹‘‚«‚İƒGƒ‰[ */
-#define PI_ERR_FILE_READ			6		/* ƒtƒ@ƒCƒ‹“Ç‚İ‚İƒGƒ‰[ */
-#define PI_ERR_END_OF_FILE			7		/* ƒtƒ@ƒCƒ‹I’[‚ğŒŸo */
-#define PI_ERR_OUT_OF_MEMORY		8		/* ƒƒ‚ƒŠ•s‘« */
-#define PI_ERR_CALLBACK_CANCELED	9		/* sƒR[ƒ‹ƒoƒbƒNŠÖ”‚É‚æ‚é’†~ */
+#define PI_OK						0		/* æ­£å¸¸ */
+#define PI_ERR_NOT_A_PI				1		/* .PIãƒ•ã‚¡ã‚¤ãƒ«ã§ã¯ãªã„ */
+#define PI_ERR_INVALID_BITDEPTH		2		/* ç„¡åŠ¹ãªè‰²æ·±åº¦(4,8 ä»¥å¤–) */
+#define PI_ERR_INVALID_WIDTH		3		/* ç„¡åŠ¹ãªå¹…(0 or 65535è¶…) */
+#define PI_ERR_INVALID_HEIGHT		4		/* ç„¡åŠ¹ãªé«˜ã•(0 or 65535è¶…) */
+#define PI_ERR_FILE_WRITE			5		/* ãƒ•ã‚¡ã‚¤ãƒ«æ›¸ãè¾¼ã¿ã‚¨ãƒ©ãƒ¼ */
+#define PI_ERR_FILE_READ			6		/* ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚¨ãƒ©ãƒ¼ */
+#define PI_ERR_END_OF_FILE			7		/* ãƒ•ã‚¡ã‚¤ãƒ«çµ‚ç«¯ã‚’æ¤œå‡º */
+#define PI_ERR_OUT_OF_MEMORY		8		/* ãƒ¡ãƒ¢ãƒªä¸è¶³ */
+#define PI_ERR_CALLBACK_CANCELED	9		/* è¡Œã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã«ã‚ˆã‚‹ä¸­æ­¢ */
 #endif
 
-	/* Šeíƒtƒ‰ƒO‚È‚Ç */
-#define PI_FLAG_NO_COMMENT		0x0001		/* ƒRƒƒ“ƒg‚ğæ“¾‚µ‚È‚¢ */
-#define PI_FLAG_MISSING_SIG		0x0002		/* ƒtƒ@ƒCƒ‹æ“ª‚Ì "Pi" ‚ª‚È‚¢ */
-#define PI_MODE_NO_PALETTE		0x80		/* ƒfƒtƒHƒ‹ƒgƒpƒŒƒbƒgg—p‰æ‘œ */
-#define PI_TRANSCOLOR_NONE		(-1)		/* “§–¾F‚ª‚È‚¢ê‡‚Ìw¦’l */
+	/* å„ç¨®ãƒ•ãƒ©ã‚°ãªã© */
+#define PI_FLAG_NO_COMMENT		0x0001		/* ã‚³ãƒ¡ãƒ³ãƒˆã‚’å–å¾—ã—ãªã„ */
+#define PI_FLAG_MISSING_SIG		0x0002		/* ãƒ•ã‚¡ã‚¤ãƒ«å…ˆé ­ã® "Pi" ãŒãªã„ */
+#define PI_MODE_NO_PALETTE		0x80		/* ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ‘ãƒ¬ãƒƒãƒˆä½¿ç”¨ç”»åƒ */
+#define PI_TRANSCOLOR_NONE		(-1)		/* é€æ˜è‰²ãŒãªã„å ´åˆã®æŒ‡ç¤ºå€¤ */
 
-	/* ƒGƒ‰[ˆ——pƒ}ƒNƒ */
+	/* ã‚¨ãƒ©ãƒ¼å‡¦ç†ç”¨ãƒã‚¯ãƒ­ */
 #ifdef PI_SUPPORT_LONGJMP
-	/* setjmp() ‚Æ longjmp() ‚É‚æ‚é•û–@ */
+	/* setjmp() ã¨ longjmp() ã«ã‚ˆã‚‹æ–¹æ³• */
 #include <setjmp.h>		/* setjmp() & longjmp() */
 #define PI_ISERR(p)     (0)
 #define PI_RESETERR(p)
@@ -189,7 +189,7 @@ typedef RGBQUAD pi_color;
 #define PI_SETERR_RETURN(p,e)        longjmp((p)->jmpbuf,(e))
 #define PI_SETERR_RETURN_VAL(p,e,r)  longjmp((p)->jmpbuf,(e))
 #else
-	/* •Ï” error ‚Ì’l‚ğŒ©‚È‚ª‚ç‡Ÿ return ‚µ‚Ä‚¢‚­•û–@ */
+	/* å¤‰æ•° error ã®å€¤ã‚’è¦‹ãªãŒã‚‰é †æ¬¡ return ã—ã¦ã„ãæ–¹æ³• */
 #define PI_ISERR(p)     ((p)->error!=PI_OK)
 #define PI_RESETERR(p)  ((p)->error=PI_OK)
 #define PI_CHKERR_RETURN(p) \
@@ -202,7 +202,7 @@ typedef RGBQUAD pi_color;
             do { if (!PI_ISERR(p)) (p)->error=(e); return (r); } while (0)
 #endif /* PI_SUPPORT_LONGJMP */
 
-	/* ˆês“–‚½‚è‚ÌƒoƒCƒg”‚ğŒvZ‚·‚éƒ}ƒNƒ */
+	/* ä¸€è¡Œå½“ãŸã‚Šã®ãƒã‚¤ãƒˆæ•°ã‚’è¨ˆç®—ã™ã‚‹ãƒã‚¯ãƒ­ */
 #ifdef PI_READ_OUTPUT_8BPP_FMT
 #define pi_read_get_rowbytes(p) ((p)->width)
 #else
@@ -210,10 +210,10 @@ typedef RGBQUAD pi_color;
             (((p)->bitdepth == 8) ? (p)->width : ((pi_uint32)(p)->width+1)/2)
 #endif
 
-	/* piread.c / piwrite.c ‚Å‚Ì‚İQÆ‚³‚ê‚éƒ}ƒNƒ */
+	/* piread.c / piwrite.c ã§ã®ã¿å‚ç…§ã•ã‚Œã‚‹ãƒã‚¯ãƒ­ */
 #ifdef PI_INTERNAL
 
-	/* FASTCALL ŒÄ‚Ño‚µ‹K–ñ */
+	/* FASTCALL å‘¼ã³å‡ºã—è¦ç´„ */
 #undef FASTCALL
 #ifdef PI_CALL_USING_FASTCALL
 #if defined(__GNUC__) && defined(__i386__)			/* gcc (on i386) */
@@ -226,7 +226,7 @@ typedef RGBQUAD pi_color;
 #define FASTCALL
 #endif
 
-	/* •Ï”/Œ^‚Ìƒrƒbƒg” */
+	/* å¤‰æ•°/å‹ã®ãƒ“ãƒƒãƒˆæ•° */
 #define bitsof(x)	(sizeof(x) * CHAR_BIT)
 
 #endif /* PI_INTERNAL */
@@ -241,7 +241,7 @@ typedef unsigned short pi_uint16;
 typedef long           pi_int32;
 typedef unsigned long  pi_uint32;
 
-typedef unsigned int pi_bitbuf;		/* unsigned ‚©‚Â 16bit ˆÈã */
+typedef unsigned int pi_bitbuf;		/* unsigned ã‹ã¤ 16bit ä»¥ä¸Š */
 typedef size_t       pi_size_t;
 typedef ptrdiff_t    pi_ptrdif_t;
 
@@ -266,7 +266,7 @@ typedef struct pi_stdio  * pi_stdiop;
 typedef pi_size_t (*pi_iofncp)(pi_structp);
 typedef pi_int (*pi_progfncp)(pi_structp, pi_uint, pi_uint);
 
-	/* ƒpƒŒƒbƒg—pƒJƒ‰[\‘¢‘Ì(ƒfƒtƒHƒ‹ƒg’è‹`) */
+	/* ãƒ‘ãƒ¬ãƒƒãƒˆç”¨ã‚«ãƒ©ãƒ¼æ§‹é€ ä½“(ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå®šç¾©) */
 #ifndef PI_COLOR_DEFINED
 #define PI_COLOR_DEFINED
 typedef struct pi_color {
@@ -277,85 +277,85 @@ typedef struct pi_color {
 #endif
 typedef pi_color * pi_colorp;
 
-	/* ‚bŒ¾Œê•W€ I/O ‚É‚æ‚é“üo—ÍƒTƒ|[ƒg—p\‘¢‘Ì */
+	/* ï¼£è¨€èªæ¨™æº– I/O ã«ã‚ˆã‚‹å…¥å‡ºåŠ›ã‚µãƒãƒ¼ãƒˆç”¨æ§‹é€ ä½“ */
 #ifdef PI_READ_SUPPORT_STDIO
 #include <stdio.h>
 struct pi_stdio {
-	FILE		*fp;			/* “üo—ÍƒXƒgƒŠ[ƒ€ */
-	pi_byte		iobuf[4096];	/* “üo—Íƒoƒbƒtƒ@ */
+	FILE		*fp;			/* å…¥å‡ºåŠ›ã‚¹ãƒˆãƒªãƒ¼ãƒ  */
+	pi_byte		iobuf[4096];	/* å…¥å‡ºåŠ›ãƒãƒƒãƒ•ã‚¡ */
 };
 #endif
 
-	/* “à‘ ƒRƒƒ“ƒg•Û—p\‘¢‘Ì */
+	/* å†…è”µã‚³ãƒ¡ãƒ³ãƒˆä¿æŒç”¨æ§‹é€ ä½“ */
 #ifdef PI_READ_SUPPORT_COMMENT
 struct pi_text {
-	pi_textp	next;		/* Ÿ‚Ö‚Ìƒ|ƒCƒ“ƒ^ */
-	pi_uint32	size;		/* “à‘ ƒeƒLƒXƒg‚ÌƒTƒCƒY */
-	pi_charp	text;		/* “à‘ ƒeƒLƒXƒg */
+	pi_textp	next;		/* æ¬¡ã¸ã®ãƒã‚¤ãƒ³ã‚¿ */
+	pi_uint32	size;		/* å†…è”µãƒ†ã‚­ã‚¹ãƒˆã®ã‚µã‚¤ã‚º */
+	pi_charp	text;		/* å†…è”µãƒ†ã‚­ã‚¹ãƒˆ */
 };
 #endif
 
-	/* pi_struct \‘¢‘Ì */
+	/* pi_struct æ§‹é€ ä½“ */
 struct pi_struct {
-		/* ƒGƒ‰[ˆ——p•Ï” */
+		/* ã‚¨ãƒ©ãƒ¼å‡¦ç†ç”¨å¤‰æ•° */
 #ifdef PI_SUPPORT_LONGJMP
-	jmp_buf		jmpbuf;				/* setjmp() / longjmp() —pƒRƒ“ƒeƒLƒXƒg */
+	jmp_buf		jmpbuf;				/* setjmp() / longjmp() ç”¨ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ */
 #else
-	pi_int		error;				/* ƒGƒ‰[ƒR[ƒh */
+	pi_int		error;				/* ã‚¨ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ */
 #endif
-		/* .PIƒtƒ@ƒCƒ‹ƒwƒbƒ_î•ñ•Šeí‰æ‘œî•ñ */
-	pi_uint		width, height;		/* ‰æ‘œ‚ÌƒTƒCƒY */
-	pi_uint		colors;				/* F”(16 or 256) */
-	pi_byte		bitdepth;			/* F[“x(4 or 8) */
-	pi_byte		aspect_x, aspect_y;	/* ƒAƒXƒyƒNƒg”ä */
-	pi_byte		mode;				/* ‰æ‘œƒ‚[ƒh */
-	pi_byte		machine[4];			/* ‹@í¯•Êq(ƒGƒ“ƒR[ƒ_–¼) */
+		/* .PIãƒ•ã‚¡ã‚¤ãƒ«ãƒ˜ãƒƒãƒ€æƒ…å ±ï¼†å„ç¨®ç”»åƒæƒ…å ± */
+	pi_uint		width, height;		/* ç”»åƒã®ã‚µã‚¤ã‚º */
+	pi_uint		colors;				/* è‰²æ•°(16 or 256) */
+	pi_byte		bitdepth;			/* è‰²æ·±åº¦(4 or 8) */
+	pi_byte		aspect_x, aspect_y;	/* ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯” */
+	pi_byte		mode;				/* ç”»åƒãƒ¢ãƒ¼ãƒ‰ */
+	pi_byte		machine[4];			/* æ©Ÿç¨®è­˜åˆ¥å­(ã‚¨ãƒ³ã‚³ãƒ¼ãƒ€å) */
 
-		/* I/O ŠÖŒW */
-	pi_iofncp	iofunc;				/* I/O ŠÖ” */
-	pi_voidp	ioptr;				/* I/O ŠÖ”—p”Ä—pƒ|ƒCƒ“ƒ^ */
-	pi_bytep	iobufptr;			/* I/O ƒoƒbƒtƒ@‚Ìƒ|ƒCƒ“ƒ^ */
-	pi_size_t	iobufcnt;			/* I/O ƒoƒbƒtƒ@‚Ìc‚èƒoƒCƒg” */
-	pi_bitbuf	bitbuf;				/* ƒrƒbƒgƒoƒbƒtƒ@ */
-	pi_uint		bitcnt;				/* ƒrƒbƒgƒoƒbƒtƒ@‚Ìc‚èƒrƒbƒg” */
+		/* I/O é–¢ä¿‚ */
+	pi_iofncp	iofunc;				/* I/O é–¢æ•° */
+	pi_voidp	ioptr;				/* I/O é–¢æ•°ç”¨æ±ç”¨ãƒã‚¤ãƒ³ã‚¿ */
+	pi_bytep	iobufptr;			/* I/O ãƒãƒƒãƒ•ã‚¡ã®ãƒã‚¤ãƒ³ã‚¿ */
+	pi_size_t	iobufcnt;			/* I/O ãƒãƒƒãƒ•ã‚¡ã®æ®‹ã‚Šãƒã‚¤ãƒˆæ•° */
+	pi_bitbuf	bitbuf;				/* ãƒ“ãƒƒãƒˆãƒãƒƒãƒ•ã‚¡ */
+	pi_uint		bitcnt;				/* ãƒ“ãƒƒãƒˆãƒãƒƒãƒ•ã‚¡ã®æ®‹ã‚Šãƒ“ãƒƒãƒˆæ•° */
 
-		/* ì‹Æ—p—ÌˆæEì‹Æ—p•Ï” */
-	pi_bytep	clrtable;			/* ƒJƒ‰[ƒe[ƒuƒ‹ */
-	pi_bytep	clrcode;			/* ƒJƒ‰[ƒR[ƒhƒe[ƒuƒ‹ */
-	pi_bytep	clrcodelen;			/* ƒJƒ‰[ƒR[ƒh‚Ì’·‚³ */
-	pi_bytep	lencode;			/* ˜A½”ƒR[ƒhƒe[ƒuƒ‹ */
-	pi_bytep	lencodelen;			/* ˜A½”ƒR[ƒh‚Ì’·‚³ */
+		/* ä½œæ¥­ç”¨é ˜åŸŸãƒ»ä½œæ¥­ç”¨å¤‰æ•° */
+	pi_bytep	clrtable;			/* ã‚«ãƒ©ãƒ¼ãƒ†ãƒ¼ãƒ–ãƒ« */
+	pi_bytep	clrcode;			/* ã‚«ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ãƒ†ãƒ¼ãƒ–ãƒ« */
+	pi_bytep	clrcodelen;			/* ã‚«ãƒ©ãƒ¼ã‚³ãƒ¼ãƒ‰ã®é•·ã• */
+	pi_bytep	lencode;			/* é€£é–æ•°ã‚³ãƒ¼ãƒ‰ãƒ†ãƒ¼ãƒ–ãƒ« */
+	pi_bytep	lencodelen;			/* é€£é–æ•°ã‚³ãƒ¼ãƒ‰ã®é•·ã• */
 
-	pi_uint		prevpos;			/* ˆê‚Â‘O‚ÌˆÊ’uƒR[ƒh */
-	pi_uint		savedpos;			/* Œ»İ‚ÌˆÊ’uƒR[ƒh */
-	pi_uint32	savedlen;			/* Œ»İ‚Ì˜A½” */
+	pi_uint		prevpos;			/* ä¸€ã¤å‰ã®ä½ç½®ã‚³ãƒ¼ãƒ‰ */
+	pi_uint		savedpos;			/* ç¾åœ¨ã®ä½ç½®ã‚³ãƒ¼ãƒ‰ */
+	pi_uint32	savedlen;			/* ç¾åœ¨ã®é€£é–æ•° */
 
-	pi_bytep	rowbuf;				/* sƒoƒbƒtƒ@ */
-	pi_bytep	rowptr[4];			/* s‚Ìæ“ªƒAƒhƒŒƒX */
-	pi_bytep	rowend;				/* s‚ÌI’[ƒAƒhƒŒƒX */
-	pi_bytep	currentp;			/* Œ»İ‚Ìs‚Ì’–Ú“_ */
-	pi_uint		rownum;				/* Œ»İ‚Ìs‚Ìs”Ô† (1`height) */
-	pi_ptrdif_t	posdiff[6];			/* ˆÊ’uƒR[ƒh‚É‘Î‰‚·‚é‘Š‘ÎƒAƒhƒŒƒX */
+	pi_bytep	rowbuf;				/* è¡Œãƒãƒƒãƒ•ã‚¡ */
+	pi_bytep	rowptr[4];			/* è¡Œã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹ */
+	pi_bytep	rowend;				/* è¡Œã®çµ‚ç«¯ã‚¢ãƒ‰ãƒ¬ã‚¹ */
+	pi_bytep	currentp;			/* ç¾åœ¨ã®è¡Œã®æ³¨ç›®ç‚¹ */
+	pi_uint		rownum;				/* ç¾åœ¨ã®è¡Œã®è¡Œç•ªå· (1ï½height) */
+	pi_ptrdif_t	posdiff[6];			/* ä½ç½®ã‚³ãƒ¼ãƒ‰ã«å¯¾å¿œã™ã‚‹ç›¸å¯¾ã‚¢ãƒ‰ãƒ¬ã‚¹ */
 
-		/* .PIƒtƒ@ƒCƒ‹ƒwƒbƒ_‚ÌŠg’£î•ñ */
+		/* .PIãƒ•ã‚¡ã‚¤ãƒ«ãƒ˜ãƒƒãƒ€ã®æ‹¡å¼µæƒ…å ± */
 #if defined(PI_READ_SUPPORT_EXTINFO) || defined(PI_WRITE_SUPPORT_EXTINFO)
-	pi_uint		offset_x, offset_y;	/* ‰æ‘œ‚Ì•\¦ŠJn“_(ƒIƒtƒZƒbƒg) */
-	pi_int		transcolor;			/* “§–¾F‚É‚È‚éƒpƒŒƒbƒg”Ô† (0`15/255) */
-	pi_int		sigbits;			/* ƒpƒŒƒbƒg‚Ì—LŒøƒrƒbƒg” (1`8) */
-	pi_int		colorused;			/* ƒpƒŒƒbƒg‚Ìg—pŒÂ” (1`16/256) */
+	pi_uint		offset_x, offset_y;	/* ç”»åƒã®è¡¨ç¤ºé–‹å§‹ç‚¹(ã‚ªãƒ•ã‚»ãƒƒãƒˆ) */
+	pi_int		transcolor;			/* é€æ˜è‰²ã«ãªã‚‹ãƒ‘ãƒ¬ãƒƒãƒˆç•ªå· (0ï½15/255) */
+	pi_int		sigbits;			/* ãƒ‘ãƒ¬ãƒƒãƒˆã®æœ‰åŠ¹ãƒ“ãƒƒãƒˆæ•° (1ï½8) */
+	pi_int		colorused;			/* ãƒ‘ãƒ¬ãƒƒãƒˆã®ä½¿ç”¨å€‹æ•° (1ï½16/256) */
 #endif
-		/* “à‘ ƒeƒLƒXƒgî•ñ */
+		/* å†…è”µãƒ†ã‚­ã‚¹ãƒˆæƒ…å ± */
 #if defined(PI_READ_SUPPORT_COMMENT) || defined(PI_WRITE_SUPPORT_COMMENT)
-	pi_text		comment;			/* “à‘ ƒeƒLƒXƒgƒoƒbƒtƒ@ */
+	pi_text		comment;			/* å†…è”µãƒ†ã‚­ã‚¹ãƒˆãƒãƒƒãƒ•ã‚¡ */
 #endif
-		/* ƒR[ƒ‹ƒoƒbƒNŠÖ” */
+		/* ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•° */
 #ifdef PI_SUPPORT_PROGRESS_CALLBACK
-	pi_progfncp	progfunc;			/* ƒR[ƒ‹ƒoƒbƒNŠÖ” */
-	pi_voidp	progptr;			/* ƒR[ƒ‹ƒoƒbƒNŠÖ”—p”Ä—pƒ|ƒCƒ“ƒ^ */
+	pi_progfncp	progfunc;			/* ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•° */
+	pi_voidp	progptr;			/* ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ç”¨æ±ç”¨ãƒã‚¤ãƒ³ã‚¿ */
 #endif
 };
 
-	/* ƒvƒƒgƒ^ƒCƒvéŒ¾ (piread.c) */
+	/* ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ (piread.c) */
 void pi_read_init(pi_structp);
 void pi_read_end(pi_structp);
 void pi_read_header(pi_structp, pi_uint);
@@ -373,7 +373,7 @@ void pi_read_init_io(pi_structp, FILE *);
 void pi_read_end_io(pi_structp);
 #endif
 
-	/* ƒvƒƒgƒ^ƒCƒvéŒ¾ (piwrite.c) */
+	/* ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ (piwrite.c) */
 void pi_write_init(pi_structp);
 void pi_write_end(pi_structp);
 void pi_write_header(pi_structp);

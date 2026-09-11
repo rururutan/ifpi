@@ -18,7 +18,7 @@
 
 #ifdef SPI_IMPLEMENT_DLLMAIN
 
-	/* ƒOƒ[ƒoƒ‹•Ï” */
+	/* ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•° */
 #ifdef SPI_IMPLEMENT_DLLHANDLE
 HINSTANCE ghThisInst = NULL;	/* Handle to the DLL's instance. */
 #endif
@@ -53,7 +53,7 @@ BOOL WINAPI
 #endif	/* SPI_IMPLEMENT_DLLMAIN */
 
 /*
-** ----- Plug-in‚ÉŠÖ‚·‚éî•ñ‚ğ“¾‚é ---------------------------------------
+** ----- Plug-inã«é–¢ã™ã‚‹æƒ…å ±ã‚’å¾—ã‚‹ ---------------------------------------
 */
 int _export PASCAL
  GetPluginInfo(int infono, LPSTR buf, int buflen)
@@ -104,14 +104,14 @@ int _export PASCAL
 #ifdef SPI_IMPLEMENT_CONFIGDLG
 
 /*
-** ----- Plug-in‚Ìİ’èƒ_ƒCƒAƒƒO -----------------------------------------
+** ----- Plug-inã®è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚° -----------------------------------------
 */
 int _export PASCAL
  ConfigurationDlg(HWND hOwner, int fnc)
 {
-	enum {						/* fnc ‚Ì‹@”\ƒR[ƒh */
-		SPI_CFGDLG_ABOUT = 0,	/* Plug-in ‚Ì about ƒ_ƒCƒAƒƒO•\¦ */
-		SPI_CFGDLG_SETUP = 1	/* İ’èƒ_ƒCƒAƒƒO•\¦ */
+	enum {						/* fnc ã®æ©Ÿèƒ½ã‚³ãƒ¼ãƒ‰ */
+		SPI_CFGDLG_ABOUT = 0,	/* Plug-in ã® about ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º */
+		SPI_CFGDLG_SETUP = 1	/* è¨­å®šãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤º */
 	};
 
 	switch (fnc) {
@@ -134,7 +134,7 @@ int _export PASCAL
 #endif	/* SPI_IMPLEMENT_CONFIGDLG */
 
 /*
-** ----- “WŠJ‰Â”\‚È(‘Î‰‚µ‚Ä‚¢‚é)ƒtƒ@ƒCƒ‹Œ`®‚©’²‚×‚é --------------------
+** ----- å±•é–‹å¯èƒ½ãª(å¯¾å¿œã—ã¦ã„ã‚‹)ãƒ•ã‚¡ã‚¤ãƒ«å½¢å¼ã‹èª¿ã¹ã‚‹ --------------------
 */
 int _export PASCAL
  IsSupported(LPCSTR filename, void* dw)
@@ -161,7 +161,7 @@ int _export PASCAL
 }
 
 /*
-** ----- ‰æ‘œƒtƒ@ƒCƒ‹‚ÉŠÖ‚·‚éî•ñ‚ğ“¾‚é ----------------------------------
+** ----- ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«ã«é–¢ã™ã‚‹æƒ…å ±ã‚’å¾—ã‚‹ ----------------------------------
 */
 int _export PASCAL
  GetPictureInfo(LPCSTR buf, LONG_PTR len, unsigned int flag, PictureInfo *lpInfo)
@@ -197,7 +197,7 @@ int _export PASCAL
 
 
 /*
-** ----- ‰æ‘œ‚ğ“WŠJ‚·‚é --------------------------------------------------
+** ----- ç”»åƒã‚’å±•é–‹ã™ã‚‹ --------------------------------------------------
 */
 int _export PASCAL
  GetPicture(LPCSTR buf, LONG_PTR len, unsigned int flag, HLOCAL *pHBInfo,
@@ -243,7 +243,7 @@ GetPictureW(LPCWSTR buf, LONG_PTR len, unsigned int flag, HLOCAL *pHBInfo,
 
 
 /*
-** ----- ƒvƒŒƒrƒ…[EƒJƒ^ƒƒO•\¦—p‰æ‘œk¬“WŠJƒ‹[ƒeƒBƒ“ ----------------
+** ----- ãƒ—ãƒ¬ãƒ“ãƒ¥ãƒ¼ãƒ»ã‚«ã‚¿ãƒ­ã‚°è¡¨ç¤ºç”¨ç”»åƒç¸®å°å±•é–‹ãƒ«ãƒ¼ãƒ†ã‚£ãƒ³ ----------------
 */
 int _export PASCAL
  GetPreview(LPCSTR buf, LONG_PTR len, unsigned int flag, HLOCAL *pHBInfo,

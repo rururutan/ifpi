@@ -15,7 +15,7 @@
 
 
 /*
-**		�f�[�^�ԋp�p�������o�b�t�@�����蓖�Ă�
+**		データ返却用メモリバッファを割り当てる
 */
 int SpiAllocBuffer(HLOCAL *pHB, LPBYTE *pBuff, UINT uBytes)
 {
@@ -35,8 +35,8 @@ int SpiAllocBuffer(HLOCAL *pHB, LPBYTE *pBuff, UINT uBytes)
 #ifdef SPI_SUPPORT_SPIREALLOC
 
 /*
-**		�������o�b�t�@�̃T�C�Y��ύX����
-**		Note) uBytes==0 �̏ꍇ�ɂ͖��Ή��ł��I
+**		メモリバッファのサイズを変更する
+**		Note) uBytes==0 の場合には未対応です！
 */
 int SpiReAllocBuffer(HLOCAL *pHB, LPBYTE *pBuff, UINT uBytes)
 {
@@ -61,7 +61,7 @@ int SpiReAllocBuffer(HLOCAL *pHB, LPBYTE *pBuff, UINT uBytes)
 #ifdef SPI_ALLOCATE_ROWPOINTERS
 
 /*
-**		�s�|�C���^�t���C���[�W�o�b�t�@�����蓖�Ă�
+**		行ポインタ付きイメージバッファを割り当てる
 */
 int SpiAllocImageBuffer(HLOCAL *pHBImg, LPBYTE **ppRowp, DWORD rowbytes,
                         DWORD height)
@@ -90,7 +90,7 @@ int SpiAllocImageBuffer(HLOCAL *pHBImg, LPBYTE **ppRowp, DWORD rowbytes,
 #endif	/* SPI_ALLOCATE_ROWPOINTERS */
 
 /*
-**		DIB �ԋp�p�������o�b�t�@�̊��蓖�Ăƍ\���̂ւ̒l�̐ݒ���s�Ȃ�
+**		DIB 返却用メモリバッファの割り当てと構造体への値の設定を行なう
 */
 #ifdef SPI_ALLOCATE_ROWPOINTERS
 int SpiInitBitmap(HLOCAL *pHBInfo, LPBITMAPINFO *ppbmi, HLOCAL *pHBImg,
@@ -111,7 +111,7 @@ int SpiInitBitmap(HLOCAL *pHBInfo, LPBITMAPINFO *ppbmi, HLOCAL *pHBImg,
 	if (err != SPI_ERROR_SUCCESS) return err;
 
 	rowbytes = (width * clrdepth + 31) / 32 * 4;
-#ifdef SPI_ALLOCATE_ROWPOINTERS			/* ��4�o�C�g�P�ʂ֐؂�グ�� */
+#ifdef SPI_ALLOCATE_ROWPOINTERS			/* ↑4バイト単位へ切り上げる */
 	err = SpiAllocImageBuffer(pHBImg, ppRowp, rowbytes, height);
 #else
 	*lpRowb = rowbytes;

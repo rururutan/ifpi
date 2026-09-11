@@ -12,12 +12,12 @@
 #include "spibase.h"
 #include "pilib.h"
 
-#define IFPI_VERSION	"0.21+1"		/* ƒo[ƒWƒ‡ƒ“ */
+#define IFPI_VERSION	"0.21+1"		/* ãƒãƒ¼ã‚¸ãƒ§ãƒ³ */
 
 
-	/* ƒOƒ[ƒoƒ‹•Ï” */
-const int NumInfo = 4;			/* ƒvƒ‰ƒOƒCƒ“î•ñ‚Ìî•ñ” */
-const LPCSTR PluginInfo[] = {	/* ƒvƒ‰ƒOƒCƒ“î•ñ */
+	/* ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•° */
+const int NumInfo = 4;			/* ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æƒ…å ±ã®æƒ…å ±æ•° */
+const LPCSTR PluginInfo[] = {	/* ãƒ—ãƒ©ã‚°ã‚¤ãƒ³æƒ…å ± */
 	"00IN",
 	"Pi to DIB filter ver." IFPI_VERSION " (C) Miyasaka, Masaru",
 	"*.pi",
@@ -25,7 +25,7 @@ const LPCSTR PluginInfo[] = {	/* ƒvƒ‰ƒOƒCƒ“î•ñ */
 };
 
 
-	/* ƒvƒƒgƒ^ƒCƒvéŒ¾ */
+	/* ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ */
 int IsSupportedFormat(LPBYTE, DWORD, LPCSTR);
 int GetImageInfo(SPI_FILE *, PictureInfo *);
 int GetImage(SPI_FILE *, HANDLE *, HANDLE *, SPIPROC, LONG_PTR);
@@ -35,17 +35,17 @@ static pi_size_t pi_read_filbuf_spi(pi_structp);
 
 
 /*
-**		.pi ƒtƒ@ƒCƒ‹‚©‚Ç‚¤‚©ƒ`ƒFƒbƒN‚·‚é
+**		.pi ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã©ã†ã‹ãƒã‚§ãƒƒã‚¯ã™ã‚‹
 */
 int IsSupportedFormat(LPBYTE buf, DWORD rbytes, LPSTR filename)
 {
-	if (rbytes < 18) return FALSE;	/* Piƒtƒ@ƒCƒ‹‚Ì(Å¬)ƒwƒbƒ_ƒTƒCƒY */
+	if (rbytes < 18) return FALSE;	/* Piãƒ•ã‚¡ã‚¤ãƒ«ã®(æœ€å°)ãƒ˜ãƒƒãƒ€ã‚µã‚¤ã‚º */
 	return (buf[0] == 'P') && (buf[1] == 'i');
 }
 
 
 /*
-**		.pi ƒtƒ@ƒCƒ‹‚ÌŠeíî•ñ‚ğ“¾‚é
+**		.pi ãƒ•ã‚¡ã‚¤ãƒ«ã®å„ç¨®æƒ…å ±ã‚’å¾—ã‚‹
 */
 int GetImageInfo(SPI_FILE *fp, PictureInfo *lpInfo)
 {
@@ -81,12 +81,12 @@ error:
 
 
 /*
-**		.pi ƒtƒ@ƒCƒ‹‚Ì‰æ‘œ‚ğ“WŠJ‚·‚é
+**		.pi ãƒ•ã‚¡ã‚¤ãƒ«ã®ç”»åƒã‚’å±•é–‹ã™ã‚‹
 */
 int GetImage(SPI_FILE *fp, HANDLE *pHBInfo, HANDLE *pHBImg,
              SPIPROC lpProgCallback, LONG_PTR lData)
 {
-	enum { NCALL = 64 };	/* ƒR[ƒ‹ƒoƒbƒNŠÖ”‚ğŒÄ‚Ô‰ñ” */
+	enum { NCALL = 64 };	/* ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã‚’å‘¼ã¶å›æ•° */
 	pi_struct pi;
 	LPBITMAPINFO lpbmi;
 	LPBYTE lpbits, lprow;
@@ -132,7 +132,7 @@ error:
 
 
 /*
-**		ƒf[ƒ^“Ç‚İ‚İ‚Ì€”õ
+**		ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿ã®æº–å‚™
 */
 static void pi_read_init_io(pi_structp pi_ptr, SPI_FILE *fp)
 {
@@ -144,7 +144,7 @@ static void pi_read_init_io(pi_structp pi_ptr, SPI_FILE *fp)
 
 
 /*
-**		ƒf[ƒ^“Ç‚İ‚İŠÖ”
+**		ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿é–¢æ•°
 */
 static pi_size_t pi_read_filbuf_spi(pi_structp pi_ptr)
 {
